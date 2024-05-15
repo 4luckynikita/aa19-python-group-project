@@ -1,6 +1,3 @@
-from datetime import date
-
-from app import app
 from models import (
     db,
     Musician,
@@ -23,13 +20,14 @@ def seed_data():
                 "email": "john@doe.com",
                 "password_hash": "hashed_password",
                 "bio": "Rocker and Roller",
+                "image_url": "http://example.com/images/johndoe.jpg",
             }
         ]
 
-        # for user_data in users:
-        #     user = User(**user_data)
-        #     db.session.add(user)
-        # db.session.commit()
+        for user_data in users:
+            user = User(**user_data)
+            db.session.add(user)
+        db.session.commit()
 
         ###############! MUSICIANS ###############
         musicians = [
@@ -39,13 +37,14 @@ def seed_data():
                 "password_hash": "hashed_password",
                 "genre": "Classic Rock",
                 "description": "Legendary rock band.",
+                "image_url": "http://example.com/images/thebeatles.jpg",
             }
         ]
 
-        # for musician_data in musicians:
-        #     musician = Musician(**musician_data)
-        #     db.session.add(musician)
-        # db.session.commit()
+        for musician_data in musicians:
+            musician = Musician(**musician_data)
+            db.session.add(musician)
+        db.session.commit()
 
         ###############! ALBUMS ###############
         albums = [
@@ -54,13 +53,14 @@ def seed_data():
                 "title": "Abbey Road",
                 "release_date": date(1969, 9, 26),
                 "description": "One of the best albums by The Beatles.",
+                "image_url": "http://example.com/images/abbeyroad.jpg",
             }
         ]
 
-        # for album_data in albums:
-        #     album = Album(**album_data)
-        #     db.session.add(album)
-        # db.session.commit()
+        for album_data in albums:
+            album = Album(**album_data)
+            db.session.add(album)
+        db.session.commit()
 
         ###############! SONGS ###############
         songs = [
@@ -68,13 +68,14 @@ def seed_data():
                 "album_id": Album.query.filter_by(title="Abbey Road").first().id,
                 "title": "Come Together",
                 "duration": 259,
+                "image_url": "http://example.com/images/cometogether.jpg",
             }
         ]
 
-        # for song_data in songs:
-        #     song = Song(**song_data)
-        #     db.session.add(song)
-        # db.session.commit()
+        for song_data in songs:
+            song = Song(**song_data)
+            db.session.add(song)
+        db.session.commit()
 
         ###############! REVIEWS ###############
         reviews = [
@@ -87,10 +88,10 @@ def seed_data():
             }
         ]
 
-        # for review_data in reviews:
-        #     review = Review(**review_data)
-        #     db.session.add(review)
-        # db.session.commit()
+        for review_data in reviews:
+            review = Review(**review_data)
+            db.session.add(review)
+        db.session.commit()
 
         ###############! FOLLOWED MUSICIANS ###############
         follows = [
@@ -100,10 +101,10 @@ def seed_data():
             }
         ]
 
-        # for follow_data in follows:
-        #     follow = FollowedMusician(**follow_data)
-        #     db.session.add(follow)
-        # db.session.commit()
+        for follow_data in follows:
+            follow = FollowedMusician(**follow_data)
+            db.session.add(follow)
+        db.session.commit()
 
         ###############! COMMENTS ###############
         comments = [
@@ -116,10 +117,10 @@ def seed_data():
             }
         ]
 
-        # for comment_data in comments:
-        #     comment = Comment(**comment_data)
-        #     db.session.add(comment)
-        # db.session.commit()
+        for comment_data in comments:
+            comment = Comment(**comment_data)
+            db.session.add(comment)
+        db.session.commit()
 
 
 if __name__ == "__main__":
