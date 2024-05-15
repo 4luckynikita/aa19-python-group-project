@@ -35,6 +35,8 @@ def seed_data():
         musicians = [
             {
                 "name": "The Beatles",
+                "email": "kpop@music.com",
+                "password_hash": "hashed_password",
                 "genre": "Classic Rock",
                 "description": "Legendary rock band.",
             }
