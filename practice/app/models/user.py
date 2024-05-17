@@ -3,15 +3,16 @@ from .db import db
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128), nullable=False)
-    bio = db.Column(db.Text, nullable=True)
-    image_url = db.Column(db.String(255), nullable=True)
-    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String, unique=True, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
+    password_hash = db.Column(db.String, nullable=False)
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable=False)
+    bio = db.Column(db.Text)
+    image_url = db.Column(db.String)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
-        db.DateTime,
-        default=db.func.current_timestamp(),
-        onupdate=db.func.current_timestamp(),
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )

@@ -19,6 +19,8 @@ def seed_data():
                 "username": "johndoe",
                 "email": "john@doe.com",
                 "password_hash": "hashed_password",
+                "first_name": "John",
+                "last_name": "Doe",
                 "bio": "Rocker and Roller",
                 "image_url": "http://example.com/images/johndoe.jpg",
             }
