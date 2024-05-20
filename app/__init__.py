@@ -31,6 +31,13 @@ app.register_blueprint(auth_routes, url_prefix="/api/auth")
 db.init_app(app)
 Migrate(app, db)
 
+
+# @app.before_first_request
+# def activate_foreign_keys():
+#     if db.engine.url.drivername == "sqlite":
+#         db.engine.execute("PRAGMA foreign_keys=ON")
+
+
 # Application Security
 CORS(app)
 

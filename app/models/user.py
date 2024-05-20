@@ -26,6 +26,13 @@ class User(db.Model, UserMixin):
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
 
+    albums = db.relationship(
+        "Album", back_populates="user", cascade="all, delete-orphan"
+    )
+    reviews = db.relationship(
+        "Review", back_populates="user", cascade="all, delete-orphan"
+    )
+
     @property
     def password(self):
         return self.hashed_password
@@ -49,4 +56,8 @@ class User(db.Model, UserMixin):
             "genre": self.genre,
             "description": self.description,
             "image_url": self.image_url,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            # "albums": [album.to_dict() for album in self.albums],
+            # "reviews": [review.to_dict() for review in self.reviews],
         }
