@@ -9,7 +9,7 @@ class Album(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    musician_id = db.Column(db.Integer, db.ForeignKey("musicians.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     title = db.Column(db.String(120), nullable=False)
     release_date = db.Column(db.Date, nullable=True)
     description = db.Column(db.Text, nullable=True)
