@@ -10,6 +10,12 @@ function SignupFormModal() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [isMusician, setIsMusician] = useState(false);
+  const [genre, setGenre] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -28,6 +34,12 @@ function SignupFormModal() {
         email,
         username,
         password,
+        first_name: firstName,
+        last_name: lastName,
+        is_musician: isMusician,
+        genre,
+        description,
+        image_url: imageUrl,
       })
     );
 
@@ -82,6 +94,53 @@ function SignupFormModal() {
             required
           />
         </label>
+        <div>
+          <label>First Name:</label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Last Name:</label>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Musician:</label>
+          <input
+            type="checkbox"
+            checked={isMusician}
+            onChange={(e) => setIsMusician(e.target.checked)}
+          />
+        </div>
+        <div>
+          <label>Genre:</label>
+          <input
+            type="text"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Image URL:</label>
+          <input
+            type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          />
+        </div>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit">Sign Up</button>
       </form>
