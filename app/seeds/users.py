@@ -5,7 +5,7 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username="Demo",
+        username="demo",
         email="demo@aa.io",
         hashed_password="password",
         first_name="Demo",
@@ -28,13 +28,52 @@ def seed_users():
         hashed_password="password",
         first_name="Bobbie",
         last_name="Smith",
-        bio="Rocker and Roller",
+        bio="My favorite genre is METALLICA!",
+        image_url="http://example.com/images/test.jpg",
+    )
+    nikita = User(
+        username="nikita",
+        email="nikita@aa.io",
+        hashed_password="password",
+        first_name="Nikita",
+        last_name="Kastyshyn",
+        bio="I'm down with whatever you got!",
+        image_url="http://example.com/images/test.jpg",
+    )
+    erik = User(
+        username="erik",
+        email="erik@aa.io",
+        hashed_password="password",
+        first_name="Erik",
+        last_name="Hervall",
+        bio="Rocker and Roller!!!",
+        image_url="http://example.com/images/test.jpg",
+    )
+    cece = User(
+        username="cece",
+        email="cece@aa.io",
+        hashed_password="password",
+        first_name="Cece",
+        last_name="Potakey",
+        bio="Let's hear some KPOP!",
         image_url="http://example.com/images/test.jpg",
     )
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(nikita)
+    db.session.add(erik)
+    db.session.add(cece)
+    db.session.commit()
+
+
+def undo_users():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM users"))
+
     db.session.commit()
 
 
@@ -44,10 +83,3 @@ def seed_users():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_users():
-    if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
-    else:
-        db.session.execute(text("DELETE FROM users"))
-
-    db.session.commit()
