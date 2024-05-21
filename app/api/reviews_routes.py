@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Review, db
 from app.forms import   ReviewForm
 
@@ -87,38 +87,65 @@ def create_album_review(id):
         return review.to_dict()
     return form.errors, 400
 
-# # create a review for a song
-@review_routes.route('/songs/<int:id>', methods=["POST"])
+# # # create a review for a song
+# @review_routes.route('/songs/<int:id>', methods=["POST"])
+# @login_required
+# def create_song_review(id):
+#     """
+#         Create a review for a song
+#     """
+#     form = ReviewForm()
+#     form["csrf_token"].data = request.cookies["csrf_token"]
+#     if form.validate_on_submit():
+#         review = Review(
+#             user_id = session['_user_id'],
+#             reviewable_type = "Song",
+#             reviewable_id = id,
+#             rating = form.data["rating"],
+#             comment = form.data["comment"],
+#             song_id = id
+#         )
+#         db.session.add(review)
+#         db.session.commit()
+#         return review.to_dict()
+#     return form.errors, 400
+
+# update a review
+@review_routes.route('/<int:id>', methods=["PUT"])
 @login_required
-def create_song_review(id):
+def update_review(id):
     """
-        Create a review for a song
+        Update a review
     """
+    review = Review.query.get(id)
+    # print('==========>', type(review.user_id) , type(current_user.id))
+    if review.user_id != current_user.id:
+        return 'you are unauthorized to perform this action', 401
     form = ReviewForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        review = Review(
-            user_id = session['_user_id'],
-            reviewable_type = "Song",
-            reviewable_id = id,
-            rating = form.data["rating"],
-            comment = form.data["comment"],
-            song_id = id
-        )
-        db.session.add(review)
+        #     return "hi"
+        # else: return "bye"
+        # review.user_id = review.user_id ,
+        # review.reviewable_type = "Album",
+        # review.reviewable_id = review.reviewable_id,
+        review.rating = form.data["rating"]
+        review.comment = form.data["comment"]
+        # review.album_id = review.album_id
         db.session.commit()
         return review.to_dict()
-    return form.errors, 400
+
+    return form.errors
 
 # delete a review
-@review_routes.route('<int:id>', methods=["DELETE"])
+@review_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_song_review(id):
     """
         Create a review for a song
     """
     review = Review.query.get(id)
-    if review.user_id == session['_user_id']:
+    if review.user_id == int(session['_user_id']):
         db.session.delete(review)
         db.session.commit()
         return 'your review has been deleted'

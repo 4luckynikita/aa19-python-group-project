@@ -6,5 +6,5 @@ from app.models import Review
 
 
 class ReviewForm(FlaskForm):
-    rating = SelectField(choices=[1, 2, 3, 4, 5], validators=[DataRequired()])
+    rating = SelectField("rating", choices=[1, 2, 3, 4, 5], validators=[DataRequired()])
     comment = StringField("Comment")
