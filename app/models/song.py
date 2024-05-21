@@ -25,8 +25,6 @@ class Song(db.Model):
     )
 
     album = db.relationship("Album", back_populates="songs")
-      # add song and album relationship
-    reviews = db.relationship("Review", back_populates="song", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
