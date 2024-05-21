@@ -50,10 +50,11 @@ def album_reviews(id):
 
     return [review.to_dict() for review in reviews]
 
+
 # # get all reviews for a song
 # @review_routes.route('songs/<int:id>')
 # @login_required
-# def album_reviews(id):
+# def song_reviews(id):
 #     """
 #     Query for all reviews for a song and returns them in a list of dictionaries
 #     """
@@ -63,12 +64,10 @@ def album_reviews(id):
 #     return [review.to_dict() for review in reviews]
 
 
-
-
 # # create a review for an album
 @review_routes.route('/albums/<int:id>', methods=["POST"])
 @login_required
-def create_review(id):
+def create_album_review(id):
     """
         Create a review for an album
     """
@@ -77,11 +76,34 @@ def create_review(id):
     if form.validate_on_submit():
         review = Review(
             user_id = session['_user_id'],
-            reviewable_type = "album",
+            reviewable_type = "Album",
             reviewable_id = id,
             rating = form.data["rating"],
             comment = form.data["comment"],
             album_id = id
+        )
+        db.session.add(review)
+        db.session.commit()
+        return review.to_dict()
+    return form.errors, 400
+
+# # create a review for a song
+@review_routes.route('/songs/<int:id>', methods=["POST"])
+@login_required
+def create_song_review(id):
+    """
+        Create a review for a song
+    """
+    form = ReviewForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        review = Review(
+            user_id = session['_user_id'],
+            reviewable_type = "Song",
+            reviewable_id = id,
+            rating = form.data["rating"],
+            comment = form.data["comment"],
+            song_id = id
         )
         db.session.add(review)
         db.session.commit()
