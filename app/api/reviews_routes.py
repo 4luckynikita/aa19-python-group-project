@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify, session
+from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
-from app.models import Review
+from app.models import Review, db
+from app.forms import   ReviewForm
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -37,17 +38,17 @@ def current_user_reviews():
 
     return [review.to_dict() for review in reviews]
 
-# # get all reviews of an album
-# @review_routes.route('albums/<int:id>')
-# @login_required
-# def album_reviews(id):
-#     """
-#     Query for all reviews for an album and returns them in a list of dictionaries
-#     """
+# get all reviews of an album
+@review_routes.route('albums/<int:id>')
+@login_required
+def album_reviews(id):
+    """
+    Query for all reviews for an album and returns them in a list of dictionaries
+    """
 
-#     reviews =  Review.query.filter_by(album_id = id)
+    reviews =  Review.query.filter_by(album_id = id)
 
-#     return [review.to_dict() for review in reviews]
+    return [review.to_dict() for review in reviews]
 
 # # get all reviews for a song
 # @review_routes.route('songs/<int:id>')
@@ -65,8 +66,24 @@ def current_user_reviews():
 
 
 # # create a review for an album
-@review_routes.route('/', methods=["POST"])
-def create_review():
-     """
-        Create a review for a song
+@review_routes.route('/albums/<int:id>', methods=["POST"])
+@login_required
+def create_review(id):
     """
+        Create a review for an album
+    """
+    form = ReviewForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        review = Review(
+            user_id = session['_user_id'],
+            reviewable_type = "album",
+            reviewable_id = id,
+            rating = form.data["rating"],
+            comment = form.data["comment"],
+            album_id = id
+        )
+        db.session.add(review)
+        db.session.commit()
+        return review.to_dict()
+    return form.errors, 400
