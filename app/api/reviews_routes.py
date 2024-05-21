@@ -71,20 +71,13 @@ def update_review(id):
         Update a review
     """
     review = Review.query.get(id)
-    # print('==========>', type(review.user_id) , type(current_user.id))
     if review.user_id != current_user.id:
         return 'you are unauthorized to perform this action', 401
     form = ReviewForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        #     return "hi"
-        # else: return "bye"
-        # review.user_id = review.user_id ,
-        # review.reviewable_type = "Album",
-        # review.reviewable_id = review.reviewable_id,
         review.rating = form.data["rating"]
         review.comment = form.data["comment"]
-        # review.album_id = review.album_id
         db.session.commit()
         return review.to_dict()
 
