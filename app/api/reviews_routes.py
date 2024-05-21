@@ -36,3 +36,37 @@ def current_user_reviews():
     reviews =  Review.query.filter_by(user_id = id)
 
     return [review.to_dict() for review in reviews]
+
+# # get all reviews of an album
+# @review_routes.route('albums/<int:id>')
+# @login_required
+# def album_reviews(id):
+#     """
+#     Query for all reviews for an album and returns them in a list of dictionaries
+#     """
+
+#     reviews =  Review.query.filter_by(album_id = id)
+
+#     return [review.to_dict() for review in reviews]
+
+# # get all reviews for a song
+# @review_routes.route('songs/<int:id>')
+# @login_required
+# def album_reviews(id):
+#     """
+#     Query for all reviews for a song and returns them in a list of dictionaries
+#     """
+
+#     reviews =  Review.query.filter_by(song_id = id)
+
+#     return [review.to_dict() for review in reviews]
+
+
+
+
+# # create a review for an album
+@review_routes.route('/', methods=["POST"])
+def create_review():
+     """
+        Create a review for a song
+    """

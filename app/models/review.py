@@ -14,6 +14,10 @@ class Review(db.Model):
     )
     reviewable_type = db.Column(db.String(50), nullable=False)
     reviewable_id = db.Column(db.Integer, nullable=False)
+    # add song and album column
+    song_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("songs.id")))
+    album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("albums.id")))
+    # add song and album column
     rating = db.Column(db.Integer)
     comment = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -22,6 +26,10 @@ class Review(db.Model):
     )
 
     user = db.relationship("User", back_populates="reviews")
+    # add song and album relationship
+    song = db.relationship("Song", back_populates="reviews")
+    album = db.relationship("Album", back_populates="reviews")
+
 
     def to_dict(self):
         return {
@@ -33,5 +41,8 @@ class Review(db.Model):
             "comment": self.comment,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
+            # add song and album relationship
+            "song_id": self.song_id,
+            "album_id": self.album_id
             # "user": self.user.to_dict() if self.user else None,
         }
