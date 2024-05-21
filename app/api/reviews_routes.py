@@ -38,30 +38,30 @@ def current_user_reviews():
 
     return [review.to_dict() for review in reviews]
 
-# get all reviews of an album
-@review_routes.route('albums/<int:id>')
-@login_required
-def album_reviews(id):
-    """
-    Query for all reviews for an album and returns them in a list of dictionaries
-    """
+# # get all reviews of an album
+# @review_routes.route('albums/<int:id>')
+# @login_required
+# def album_reviews(id):
+#     """
+#     Query for all reviews for an album and returns them in a list of dictionaries
+#     """
 
-    reviews =  Review.query.filter_by(album_id = id)
+#     reviews =  Review.query.filter_by(album_id = id)
 
-    return [review.to_dict() for review in reviews]
+#     return [review.to_dict() for review in reviews]
 
 
-# get all reviews for a song
-@review_routes.route('songs/<int:id>')
-@login_required
-def song_reviews(id):
-    """
-    Query for all reviews for a song and returns them in a list of dictionaries
-    """
+# # get all reviews for a song
+# @review_routes.route('songs/<int:id>')
+# @login_required
+# def song_reviews(id):
+#     """
+#     Query for all reviews for a song and returns them in a list of dictionaries
+#     """
 
-    reviews =  Review.query.filter_by(song_id = id)
+#     reviews =  Review.query.filter_by(song_id = id)
 
-    return [review.to_dict() for review in reviews]
+#     return [review.to_dict() for review in reviews]
 
 
 # # create a review for an album
@@ -109,3 +109,17 @@ def create_song_review(id):
         db.session.commit()
         return review.to_dict()
     return form.errors, 400
+
+# delete a review
+@review_routes.route('<int:id>', methods=["DELETE"])
+@login_required
+def delete_song_review(id):
+    """
+        Create a review for a song
+    """
+    review = Review.query.get(id)
+    if review.user_id == session['_user_id']:
+        db.session.delete(review)
+        db.session.commit()
+        return 'your review has been deleted'
+    return 'you are unauthorized to perform this action', 401
