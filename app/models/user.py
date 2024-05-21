@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    is_musician = db.Column(db.Boolean, nullable=False, default=False)
+    is_musician = db.Column(db.Boolean, default=False)
     name = db.Column(db.String(120))
     username = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True, nullable=False)
@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     genre = db.Column(db.String(80))
-    description = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text)
     image_url = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
