@@ -51,17 +51,17 @@ def album_reviews(id):
     return [review.to_dict() for review in reviews]
 
 
-# # get all reviews for a song
-# @review_routes.route('songs/<int:id>')
-# @login_required
-# def song_reviews(id):
-#     """
-#     Query for all reviews for a song and returns them in a list of dictionaries
-#     """
+# get all reviews for a song
+@review_routes.route('songs/<int:id>')
+@login_required
+def song_reviews(id):
+    """
+    Query for all reviews for a song and returns them in a list of dictionaries
+    """
 
-#     reviews =  Review.query.filter_by(song_id = id)
+    reviews =  Review.query.filter_by(song_id = id)
 
-#     return [review.to_dict() for review in reviews]
+    return [review.to_dict() for review in reviews]
 
 
 # # create a review for an album
