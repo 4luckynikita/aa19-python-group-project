@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, session
 from flask_login import login_required
 from app.models import Review
 
@@ -17,10 +17,22 @@ def reviews():
 # get review by id
 @review_routes.route('/<int:id>')
 @login_required
-def current_user_reviews(id):
+def review_by_id(id):
     """
-    Query for all reviews of the current user and returns them in a list of dictionaries
+    Query for getting a review by id and returns the review as a dictionary
     """
 
     review = Review.query.get(id)
     return review.to_dict()
+
+# get all reviews of the current user
+@review_routes.route('/current')
+@login_required
+def current_user_reviews():
+    """
+    Query for all reviews of the current user and returns them in a list of dictionaries
+    """
+    id = session['_user_id']
+    reviews =  Review.query.filter_by(user_id = id)
+
+    return [review.to_dict() for review in reviews]
