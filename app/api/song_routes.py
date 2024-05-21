@@ -6,17 +6,6 @@ from app.forms import SongForm
 song_routes = Blueprint('songs', __name__)
 
 
-# get all songs for an album
-@song_routes.route('/albums/<int:id>')
-@login_required
-def get_songs(id):
-    """
-    Query for all reviews and returns them in a list of dictionaries
-    """
-    songs = Song.query.filter_by(album_id = id)
-    return [song.to_dict() for song in songs]
-
-
 # create song by album id
 @song_routes.route('/albums/<int:id>', methods=["POST"])
 @login_required
@@ -54,4 +43,3 @@ def delete_song_review(id):
     db.session.delete(song)
     db.session.commit()
     return 'your song has been deleted'
-    
