@@ -1,9 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
-import LoginFormPage from '../components/LoginFormPage';
-import SignupFormPage from '../components/SignupFormPage';
-import Layout from './Layout';
+import { createBrowserRouter } from "react-router-dom";
+import LoginFormPage from "../components/LoginFormPage";
+import SignupFormPage from "../components/SignupFormPage";
+import Layout from "./Layout";
 import UserProfilePage from "../components/UserProfilePage";
 import EditUserForm from "../components/EditUserForm";
+import EditReviewForm from "../components/EditReviewForm";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "users/:id/edit",
         element: <EditUserForm />,
+      },
+      {
+        path: "reviews/:reviewId/edit",
+        element: <EditReviewForm />,
       },
     ],
   },

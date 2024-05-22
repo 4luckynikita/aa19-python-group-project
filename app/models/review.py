@@ -37,7 +37,23 @@ class Review(db.Model):
             "comment": self.comment,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            # add song and album relationship
-            "album_id": self.album_id
-            # "user": self.user.to_dict() if self.user else None,
+            "album_id": self.album_id,
+            "user": {
+                "id": self.user.id,
+                "username": self.user.username,
+                "email": self.user.email,
+                "first_name": self.user.first_name,
+                "last_name": self.user.last_name,
+                "genre": self.user.genre,
+                "description": self.user.description,
+                "image_url": self.user.image_url,
+            } if self.user else None,
+            "album": {
+                "id": self.album.id,
+                "title": self.album.title,
+                "release_date": self.album.release_date,
+                "description": self.album.description,
+                "image_url": self.album.image_url,
+                "user_id": self.album.user_id,
+            } if self.album else None,
         }
