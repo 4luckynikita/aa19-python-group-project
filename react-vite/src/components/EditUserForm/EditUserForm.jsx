@@ -53,7 +53,7 @@ const EditUserForm = () => {
     };
     const updatedUser = await dispatch(updateUser(id, formData));
     if (updatedUser) {
-      navigate(`/users/${id}`);
+      navigate(`/users/${id}/`);
     }
   };
 

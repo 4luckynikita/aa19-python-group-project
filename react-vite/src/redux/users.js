@@ -49,6 +49,7 @@ export const updateUser = (id, user) => async (dispatch) => {
     }
     const data = await response.json();
     dispatch(updateUserSuccess(data));
+    return data;
   } catch (error) {
     dispatch(updateUserFailure(error.message));
   }
