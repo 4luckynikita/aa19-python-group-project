@@ -40,6 +40,8 @@ class Album(db.Model):
             "image_url": self.image_url,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            # "user": self.user.to_dict() if self.user else None,
-            # "songs": [song.to_dict() for song in self.songs],
+            "user": self.user.to_dict() if self.user else None,
+            "reviews": [review.to_dict() for review in self.reviews],
+            "songs": [song.to_dict() for song in self.songs],
+            
         }

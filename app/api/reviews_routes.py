@@ -25,7 +25,12 @@ def review_by_id(id):
 
     review = Review.query.get(id)
     if review:
-        return review.to_dict()
+        review_dict = review.to_dict()
+        review_dict["user"] = review.user.to_dict()
+        review_dict["album"] = review.album.to_dict()
+        review_dict["album"]["user"] = review.album.user.to_dict()
+        review_dict["album"]["songs"] = [song.to_dict() for song in review.album.songs]
+        return review_dict
     return 'OOps! Looks like this review does not exist', 404
 
 # get all reviews of the current user
@@ -99,3 +104,10 @@ def delete_song_review(id):
         db.session.commit()
         return 'your review has been deleted'
     return 'you are unauthorized to perform this action', 401
+
+# Get all reviews by user id
+@review_routes.route('/user/<int:user_id>')
+@login_required
+def reviews_by_user_id(user_id):
+    reviews = Review.query.filter_by(user_id=user_id).all()
+    return jsonify([review.to_dict() for review in reviews])
