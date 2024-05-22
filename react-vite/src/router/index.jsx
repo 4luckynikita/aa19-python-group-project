@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import UserProfilePage from "../components/UserProfilePage";
 import EditUserForm from "../components/EditUserForm";
 import EditReviewForm from "../components/EditReviewForm";
+import HomePage from "../components/HomePage/HomePage";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <HomePage />,
       },
       {
         path: "login",

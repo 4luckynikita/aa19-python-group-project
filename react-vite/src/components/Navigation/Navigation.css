@@ -1,3 +1,69 @@
 .profile-dropdown {
   position: absolute;
+  right: 15px;
+  background-color: black;
+  border: 2px solid black;
+  padding: 5px;
+  top: 100px;
+  text-align: center;
+}
+
+.profile-dropdown li {
+  list-style: none;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 0px;
+  height: 120px;
+}
+.navbar-logo {
+  height: 250px;
+}
+.navbar-home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.new-spot-button {
+  border: none;
+  background-color: rgb(235, 235, 235);
+  color: rgb(102, 158, 177);
+  font-size: 15px;
+  padding-right: 15px;
+}
+
+.menu-button {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50%;
+  color: white;
+  background-color: rgb(0, 0, 0);
+}
+.profile-button {
+  height: 50px;
+}
+
+.navbar-icon {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+}
+
+.nav-a {
+  text-decoration: none;
+  color: rgb(255, 98, 81);
+  font-size: 25px;
 }

@@ -5,17 +5,23 @@ from flask_login import login_required, current_user
 from datetime import datetime
 album_routes = Blueprint('albums', __name__)
 
-# Get all albums
+# Get all albums with songs and reviews
 @album_routes.route("/")
 def albums():
     fetched_albums = Album.query.all()
     album_array = []
     for album in fetched_albums:
         album_dict = album.to_dict()
+        album_songs = Song.query.filter(Song.album_id == album.id)
+        album_dict['songs'] = [song.to_dict() for song in album_songs]
+        album_reviews = Review.query.filter(Review.album_id == album.id)
+        album_dict['reviews'] = [review.to_dict() for review in album_reviews]
+        album_musician = User.query.filter(User.id == album.user_id)
+        album_dict['musician'] = [musician.to_dict() for musician in album_musician]
         album_array.append(album_dict)
     return {'albums':album_array}
 
-# Get specific album with songs
+# Get specific album with songs and musician info
 @album_routes.route("/<int:id>")
 def album_by_id(id):
     found_album = Album.query.get(id)
@@ -26,6 +32,8 @@ def album_by_id(id):
         album_dict['songs'] = [song.to_dict() for song in album_songs]
         album_reviews = Review.query.filter(Review.album_id == found_album.id)
         album_dict['reviews'] = [review.to_dict() for review in album_reviews]
+        album_musician = User.query.filter(User.id == found_album.user_id)
+        album_dict['musician'] = [musician.to_dict() for musician in album_musician]
         album_with_songs.append(album_dict)
         return jsonify(album_with_songs)
     else:

@@ -9,7 +9,7 @@ def seed_albums():
         title="Abbey Road",
         release_date=date(1969, 9, 26),
         description="One of the best albums by The Beatles.",
-        image_url="http://example.com/images/abbeyroad.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg",
     )
 
     the_dark_side_of_the_moon = Album(
@@ -17,7 +17,7 @@ def seed_albums():
         title="The Dark Side of the Moon",
         release_date=date(1973, 3, 1),
         description="A landmark album by Pink Floyd.",
-        image_url="http://example.com/images/darksideofmoon.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png",
     )
 
     a_night_at_the_opera = Album(
@@ -25,7 +25,7 @@ def seed_albums():
         title="A Night at the Opera",
         release_date=date(1975, 11, 21),
         description="One of Queen's most celebrated albums.",
-        image_url="http://example.com/images/nightattheopera.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/4/4d/Queen_A_Night_At_The_Opera.png",
     )
 
     nevermind = Album(
@@ -33,7 +33,7 @@ def seed_albums():
         title="Nevermind",
         release_date=date(1991, 9, 24),
         description="The album that brought grunge to the mainstream.",
-        image_url="http://example.com/images/nevermind.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg",
     )
 
     master_of_puppets = Album(
@@ -41,7 +41,7 @@ def seed_albums():
         title="Master of Puppets",
         release_date=date(1986, 3, 3),
         description="One of Metallica's most influential albums.",
-        image_url="http://example.com/images/masterofpuppets.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/b/b2/Metallica_-_Master_of_Puppets_cover.jpg",
     )
 
     let_it_bleed = Album(
@@ -49,7 +49,7 @@ def seed_albums():
         title="Let It Bleed",
         release_date=date(1969, 12, 5),
         description="A classic album by The Rolling Stones.",
-        image_url="http://example.com/images/letitbleed.jpg",
+        image_url="https://m.media-amazon.com/images/I/81Ut0SKKVhL._UF1000,1000_QL80_.jpg",
     )
 
     ok_computer = Album(
@@ -57,7 +57,7 @@ def seed_albums():
         title="OK Computer",
         release_date=date(1997, 5, 21),
         description="A critically acclaimed album by Radiohead.",
-        image_url="http://example.com/images/okcomputer.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/b/ba/Radioheadokcomputer.png",
     )
 
     led_zeppelin_iv = Album(
@@ -65,7 +65,7 @@ def seed_albums():
         title="Led Zeppelin IV",
         release_date=date(1971, 11, 8),
         description="Featuring the iconic 'Stairway to Heaven'.",
-        image_url="http://example.com/images/ledzeppeliniv.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/2/26/Led_Zeppelin_-_Led_Zeppelin_IV.jpg",
     )
 
     london_calling = Album(
@@ -73,7 +73,7 @@ def seed_albums():
         title="London Calling",
         release_date=date(1979, 12, 14),
         description="A double album by The Clash that became a classic.",
-        image_url="http://example.com/images/londoncalling.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/0/00/TheClashLondonCallingalbumcover.jpg",
     )
 
     the_joshua_tree = Album(
@@ -81,7 +81,7 @@ def seed_albums():
         title="The Joshua Tree",
         release_date=date(1987, 3, 9),
         description="The album that brought U2 international fame.",
-        image_url="http://example.com/images/joshuatree.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/6/6b/The_Joshua_Tree.png",
     )
 
     californication = Album(
@@ -89,7 +89,7 @@ def seed_albums():
         title="Californication",
         release_date=date(1999, 6, 8),
         description="One of the band's most successful albums.",
-        image_url="http://example.com/images/californication.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/en/d/df/RedHotChiliPeppersCalifornication.jpg",
     )
 
     db.session.add_all(

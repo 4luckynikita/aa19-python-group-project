@@ -1,0 +1,35 @@
+.homepage-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+.homepage-home-text {
+    font-size: 120px;
+    margin: 0px;
+}
+.homepage-featured-container-inner {
+    text-align: center;
+    padding-top: 30px;
+}
+.homepage-featured-container-title {
+    font-size: 60px;
+    margin: 0px;
+}
+.homepage-featured-image-container {
+    display: flex;
+    width: 1200px;
+    justify-content: space-between;
+}
+.homepage-featured-image {
+    width: 200px;
+}
+.homepage-featured-description {
+    font-size: 35px;
+}
+.homepage-featured-description {
+    font-size: 30px;
+}
+.homepage-featured-leftmost-container {
+    text-align: right;
+}
