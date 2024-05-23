@@ -2,6 +2,7 @@ const GET_ALBUMS_REQUEST = "albums/GET_ALBUMS_REQUEST";
 const GET_ALBUMS_SUCCESS = "albums/GET_ALBUMS_SUCCESS";
 const GET_ALBUMS_FAILURE = "albums/GET_ALBUMS_FAILURE";
 const GET_ALL_ALBUMS = "albumsReducer/GET_ALL_ALBUMS";
+const GET_ALBUMS = "album/getAlbums";
 
 const getAlbumsRequest = () => ({ type: GET_ALBUMS_REQUEST });
 const getAlbumsSuccess = (albums) => ({
@@ -13,10 +14,23 @@ const getAlbumsFailure = (error) => ({
   payload: error,
 });
 
+const getAlbums3 = (albums) => ({
+  type: GET_ALBUMS,
+  payload: albums,
+});
+
 const getAlbums2 = (albums) => ({
   type: GET_ALL_ALBUMS,
   payload: albums,
 });
+
+export const fetchAlbums = (id) => async (dispatch) => {
+  const response = await fetch(`/api/albums/musicians/${id}`);
+  if (response.ok) {
+    const albums = await response.json();
+    dispatch(getAlbums3(albums));
+  }
+};
 
 export const getAllAlbums = () => async (dispatch) => {
   const res = await fetch("/api/albums");
@@ -75,6 +89,8 @@ const albumsReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    case GET_ALBUMS:
+      return { ...state, albums: action.payload };
     default:
       return state;
   }

@@ -21,6 +21,22 @@ def albums():
         album_array.append(album_dict)
     return {'albums':album_array}
 
+@album_routes.route("musicians/<int:id>")
+def albums_by_msician_id(id):
+    found_album = Album.query.filter(Album.user_id == id).all()
+    album_with_songs = []
+    if found_album:
+        for album in found_album:
+            album_dict = album.to_dict()
+            album_songs = Song.query.filter(Song.album_id == album.id).all()
+            album_dict['songs'] = [song.to_dict() for song in album_songs]
+            album_reviews = Review.query.filter(Review.album_id == album.id).all()
+            album_dict['reviews'] = [review.to_dict() for review in album_reviews]
+            album_with_songs.append(album_dict)
+        return jsonify(album_with_songs)
+    else:
+        return {  "message": "Album could not be found" }, 404
+
 # Get specific album with songs and musician info
 @album_routes.route("/<int:id>")
 def album_by_id(id):

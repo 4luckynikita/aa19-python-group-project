@@ -6,6 +6,7 @@ import UserProfilePage from "../components/UserProfilePage";
 import EditUserForm from "../components/EditUserForm";
 import EditReviewForm from "../components/EditReviewForm";
 import HomePage from "../components/HomePage/HomePage";
+import MusicianProfilePage from "../components/MusicianProfilePage/MusicianProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,14 @@ export const router = createBrowserRouter([
       {
         path: "reviews/:reviewId/edit",
         element: <EditReviewForm />,
+      },
+      {
+        path: "users/:id/edit",
+        element: <EditUserForm />,
+      },
+      {
+        path: "musicians/:id",
+        element: <MusicianProfilePage />,
       },
     ],
   },

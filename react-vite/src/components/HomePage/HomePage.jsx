@@ -7,18 +7,20 @@ import { NavLink } from "react-router-dom";
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  let albumState = useSelector((state) => state.albums);
   //let sortedAlbums = [...albumState.albums].sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
 
   useEffect(() => {
     dispatch(getAllAlbums());
   }, [dispatch]);
 
-  let randInt = 0;
-  console.log(albumState?.albums);
-  if (albumState?.albums) {
-    randInt = Math.floor(Math.random() * albumState?.albums?.length);
-  }
+  let albumState = useSelector((state) => state.albums);
+  let randInt = 4;
+  //   console.log(albumState?.albums);
+
+  //   albumState &&
+  //     albumState?.albums?.length &&
+  //     (randInt = Math.floor(Math.random() * albumState?.albums?.length));
+
   //   console.log(randInt);
   //console.log([...albumState?.albums].sort((a, b) => new Date(b.release_date) - new Date(a.release_date)))
 
@@ -52,21 +54,24 @@ const HomePage = () => {
             Well Received Albums
           </h1>
           <div className="homepage-featured-image-container">
-            {albumState?.albums?.slice(0, 5).map((album) => (
-              <div
-                className="homepage-featured-container-image"
-                key={album?.id}
-              >
-                <NavLink to={`/musicians/${album?.user_id}`}>
-                  <img
-                    src={album?.image_url}
-                    alt={album?.title}
-                    className="homepage-featured-image"
-                  />
-                  <p className="homepage-featured-album-name">{album?.title}</p>
-                </NavLink>
-              </div>
-            ))}
+            {albumState?.albums &&
+              albumState?.albums?.slice(0, 5).map((album) => (
+                <div
+                  className="homepage-featured-container-image"
+                  key={album?.id}
+                >
+                  <NavLink to={`/musicians/${album?.user_id}`}>
+                    <img
+                      src={album?.image_url}
+                      alt={album?.title}
+                      className="homepage-featured-image"
+                    />
+                    <p className="homepage-featured-album-name">
+                      {album?.title}
+                    </p>
+                  </NavLink>
+                </div>
+              ))}
           </div>
         </div>
         <div className="homepage-featured-container-inner">
