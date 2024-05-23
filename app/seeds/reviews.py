@@ -90,6 +90,8 @@ def seed_reviews():
         comment="A great album with a unique sound!",
         album_id=11
     )
+    
+    
 
     db.session.add_all(
         [
@@ -104,6 +106,7 @@ def seed_reviews():
             london_calling_review,
             the_joshua_tree_review,
             californication_review,
+            
         ]
     )
     db.session.commit()

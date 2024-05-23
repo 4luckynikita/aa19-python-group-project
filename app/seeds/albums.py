@@ -91,6 +91,7 @@ def seed_albums():
         description="One of the band's most successful albums.",
         image_url="https://upload.wikimedia.org/wikipedia/en/d/df/RedHotChiliPeppersCalifornication.jpg",
     )
+    
 
     db.session.add_all(
         [

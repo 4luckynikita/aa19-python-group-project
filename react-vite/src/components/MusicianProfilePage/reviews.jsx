@@ -7,7 +7,7 @@ function ReviewsComponent({ reviews, id }) {
       return review.album_id == id;
     });
   }
-  //   console.log("=====================", reviews);
+  console.log("=====================", reviews);
 
   return (
     <>
@@ -17,6 +17,7 @@ function ReviewsComponent({ reviews, id }) {
           // console.log(review.created_at.split(" "))
           return (
             <div key={review.id}>
+              <h2>{review.album.title}</h2>
               <NavLink to={`/users/${review.user.id}`}>
                 {review.user.username}
               </NavLink>
