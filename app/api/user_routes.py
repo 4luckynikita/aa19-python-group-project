@@ -25,21 +25,29 @@ def user(id):
 def create_user():
     form = SignUpForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+    
     if form.validate_on_submit():
-        new_user = User(
-            username=form.data["username"],
-            email=form.data["email"],
-            password=form.data["password"],
-            first_name=form.data["first_name"],
-            last_name=form.data["last_name"],
-            is_musician=form.data["is_musician"],
-            genre=form.data["genre"],
-            description=form.data["description"],
-            image_url=form.data["image_url"],
-        )
+        user_data = {
+            "email": form.data["email"],
+            "password": form.data["password"],
+            "is_musician": form.data["is_musician"],
+            "description": form.data["description"],
+            "image_url": form.data["image_url"],
+        }
+
+        if form.data["is_musician"]:
+            user_data["name"] = form.data["name"]
+            user_data["genre"] = form.data["genre"]
+        else:
+            user_data["username"] = form.data["username"]
+            user_data["first_name"] = form.data["first_name"]
+            user_data["last_name"] = form.data["last_name"]
+
+        new_user = User(**user_data)
         db.session.add(new_user)
         db.session.commit()
         return new_user.to_dict(), 201
+
     return form.errors, 401
 
 

@@ -38,7 +38,7 @@ function MusicianProfilePage() {
               src={
                 musician && musician.image_url
                   ? `${musician.image_url}`
-                  : "aa19-python-group-project/react-vite/public/placeholder.png"
+                  : "/beatratespeechbubble.jpg"
               }
               alt="artist's/band's photo"
             />
@@ -87,7 +87,7 @@ function MusicianProfilePage() {
         )}
       </div>
       <hr />
-      <AlbumComponent id={id} />
+      <AlbumComponent id={id} key={id} />
     </>
   );
 }

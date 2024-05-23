@@ -57,14 +57,25 @@ function ProfileButton() {
               <li>{user.username}</li>
               <li>{user.email}</li>
               <li>
-                <button
-                  onClick={() => {
-                    navigate(`/users/${user.id}`);
-                    closeMenu(); // Close the menu when navigating to the profile page
-                  }}
-                >
-                  Profile
-                </button>
+                {user.is_musician ? (
+                  <button
+                    onClick={() => {
+                      navigate(`/musicians/${user.id}`, { replace: true });
+                      closeMenu();
+                    }}
+                  >
+                    Profile
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      navigate(`/users/${user.id}`, { replace: true });
+                      closeMenu();
+                    }}
+                  >
+                    Profile
+                  </button>
+                )}
               </li>
               <li>
                 <button onClick={logout}>Log Out</button>

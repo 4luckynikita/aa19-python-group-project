@@ -22,6 +22,10 @@ function AlbumComponent({ id }) {
     setAlbumID(id);
   };
 
+  if (!albums || albums.length === 0) {
+    return <p>No albums added yet!</p>;
+  }
+
   return (
     <>
       <h1>albums</h1>
@@ -33,6 +37,7 @@ function AlbumComponent({ id }) {
             return (
               <>
                 <div
+                  key={album.id}
                   className="album-container"
                   onClick={() => {
                     handleClick(album.id);

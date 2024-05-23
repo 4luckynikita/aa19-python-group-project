@@ -12,7 +12,16 @@ def seed_users():
         first_name="Demo",
         last_name="Last",
         description="Demo Demo Demo",
-        image_url="http://example.com/images/test.jpg",
+        image_url="/beatratespeechbubble.jpg",
+    )
+    demo_musician = User(
+        name="Demo Musician",
+        is_musician=True,
+        email="demo@musician.com",
+        password="password",
+        genre="Rock",
+        description="I am a demo musician",
+        image_url="http://example.com/images/demo_musician.jpg",
     )
     marnie = User(
         username="marnie",
@@ -177,6 +186,7 @@ def seed_users():
     db.session.add_all(
         [
             demo,
+            demo_musician,
             marnie,
             bobbie,
             nikita,
