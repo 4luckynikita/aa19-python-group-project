@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import CreateReviewModal from "../CreateReviewModal/CreateReviewModal";
 import { fetchAlbums } from "../../redux/albums";
 import SongsComponent from "./song";
 import ReviewsComponent from "./reviews";
@@ -66,7 +67,13 @@ function AlbumComponent({ id }) {
                           ? `${album.songs.length} song`
                           : `${album.songs.length} songs`}
                       </p>
-                      <button className="review-button">add review</button>
+                      <OpenModalButton
+                        className="post-review-button"
+                        modalComponent={
+                          <CreateReviewModal albumId={album.id} />
+                        }
+                        buttonText="Add Your Review!"
+                      />
                     </div>
                     <SongsComponent songs={album.songs} />
                   </div>

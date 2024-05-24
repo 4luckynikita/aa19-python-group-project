@@ -13,6 +13,12 @@ def users():
     users = User.query.all()
     return {"users": [user.to_dict() for user in users]}
 
+# Return all MUSICIAN users
+@user_routes.route("/musicians", methods=["GET"])
+@login_required
+def musicians():
+    musicians = User.query.filter_by(is_musician=True).all()
+    return {"users": [user.to_dict() for user in musicians]}
 
 @user_routes.route("/<int:id>", methods=["GET"])
 @login_required

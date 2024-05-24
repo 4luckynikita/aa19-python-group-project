@@ -2,6 +2,10 @@ export const GET_REVIEW_REQUEST = "reviews/GET_REVIEW_REQUEST";
 export const GET_REVIEW_SUCCESS = "reviews/GET_REVIEW_SUCCESS";
 export const GET_REVIEW_FAILURE = "reviews/GET_REVIEW_FAILURE";
 
+export const CREATE_REVIEW_REQUEST = "reviews/CREATE_REVIEW_REQUEST";
+export const CREATE_REVIEW_SUCCESS = "reviews/CREATE_REVIEW_SUCCESS";
+export const CREATE_REVIEW_FAILURE = "reviews/CREATE_REVIEW_FAILURE";
+
 export const UPDATE_REVIEW_REQUEST = "reviews/UPDATE_REVIEW_REQUEST";
 export const UPDATE_REVIEW_SUCCESS = "reviews/UPDATE_REVIEW_SUCCESS";
 export const UPDATE_REVIEW_FAILURE = "reviews/UPDATE_REVIEW_FAILURE";
@@ -17,6 +21,16 @@ const getReviewSuccess = (review) => ({
 });
 const getReviewFailure = (error) => ({
   type: GET_REVIEW_FAILURE,
+  payload: error,
+});
+
+const createReviewRequest = () => ({ type: CREATE_REVIEW_REQUEST });
+const createReviewSuccess = (review) => ({
+  type: CREATE_REVIEW_SUCCESS,
+  payload: review,
+});
+const createReviewFailure = (error) => ({
+  type: CREATE_REVIEW_FAILURE,
   payload: error,
 });
 
@@ -53,6 +67,28 @@ export const getReview = (reviewId) => async (dispatch) => {
     dispatch(getReviewSuccess(data));
   } catch (error) {
     dispatch(getReviewFailure(error.message));
+  }
+};
+
+export const createReview = (albumId, review) => async (dispatch) => {
+  dispatch(createReviewRequest());
+  try {
+    const response = await fetch(`/api/reviews/albums/${albumId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(review),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to create review");
+    }
+    const data = await response.json();
+    dispatch(createReviewSuccess(data));
+    return data;
+  } catch (error) {
+    dispatch(createReviewFailure(error.message));
   }
 };
 
@@ -102,6 +138,7 @@ const initialState = {
 
 const reviewsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CREATE_REVIEW_REQUEST:
     case GET_REVIEW_REQUEST:
     case UPDATE_REVIEW_REQUEST:
     case DELETE_REVIEW_REQUEST:
@@ -111,6 +148,7 @@ const reviewsReducer = (state = initialState, action) => {
         error: null,
       };
     case GET_REVIEW_SUCCESS:
+    case CREATE_REVIEW_SUCCESS:
     case UPDATE_REVIEW_SUCCESS: {
       return {
         ...state,
@@ -131,6 +169,7 @@ const reviewsReducer = (state = initialState, action) => {
       };
     }
     case GET_REVIEW_FAILURE:
+    case CREATE_REVIEW_FAILURE:
     case UPDATE_REVIEW_FAILURE:
     case DELETE_REVIEW_FAILURE:
       return {
