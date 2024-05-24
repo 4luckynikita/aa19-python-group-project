@@ -69,6 +69,8 @@ def update_user(id):
     if form.validate_on_submit():
         if form.data["username"]:
             user.username = form.data["username"]
+        if form.data["name"]:
+            user.name = form.data["name"]
         if form.data["email"]:
             user.email = form.data["email"]
         if form.data["password"]:

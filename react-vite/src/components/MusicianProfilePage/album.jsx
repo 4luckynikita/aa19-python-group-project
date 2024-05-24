@@ -5,9 +5,16 @@ import CreateReviewModal from "../CreateReviewModal/CreateReviewModal";
 import { fetchAlbums } from "../../redux/albums";
 import SongsComponent from "./song";
 import ReviewsComponent from "./reviews";
+import { MdDelete } from "react-icons/md";
+// import { MdDeleteForever } from "react-icons/md";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteAlbumModal from "./DeleteAlbumModal";
+import { FaPencil } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function AlbumComponent({ id }) {
   const dispatch = useDispatch();
+  const [albumTitle, setAlbumTitle] = useState("");
 
   const [albumID, setAlbumID] = useState("");
   let reviews = [];
@@ -17,11 +24,26 @@ function AlbumComponent({ id }) {
     dispatch(fetchAlbums(id));
   }, [dispatch, id]);
 
-  const albums = useSelector((state) => state.albums.albums);
-
-  const handleClick = (id) => {
+  const albums = useSelector((state) => state.musicianalbums.albums);
+  const currentUser = useSelector((state) => state.session.user);
+  const handleClick = (id, title) => {
     setAlbumID(id);
+    setAlbumTitle(title);
   };
+  // let showReviewButton = true;
+  let showDeleteButton = false;
+  if (currentUser) {
+    if (currentUser.id == id) {
+      // console.log(id)
+      // showReviewButton = false;
+    }
+  }
+  if (currentUser) {
+    if (currentUser.id == id) {
+      // console.log(id)
+      showDeleteButton = true;
+    }
+  }
 
   if (!albums || albums.length === 0) {
     return <p>No albums added yet!</p>;
@@ -41,7 +63,7 @@ function AlbumComponent({ id }) {
                   key={album.id}
                   className="album-container"
                   onClick={() => {
-                    handleClick(album.id);
+                    handleClick(album.id, album.title);
                   }}
                 >
                   <div className="album-image-container">
@@ -67,6 +89,23 @@ function AlbumComponent({ id }) {
                           ? `${album.songs.length} song`
                           : `${album.songs.length} songs`}
                       </p>
+                      {/* {showReviewButton && (
+                        <button className="review-button">add review</button>
+                      )} */}
+                      <div>
+                        {showDeleteButton && (
+                          <OpenModalMenuItem
+                            itemText={<MdDelete />}
+                            modalComponent={<DeleteAlbumModal album={album} />}
+                          />
+                        )}
+                        {/* <MdDeleteForever /> */}
+                        {showDeleteButton && (
+                          <Link to={`/albums/${album.id}/update`} state={album}>
+                            <FaPencil />
+                          </Link>
+                        )}
+                      </div>
                       <OpenModalButton
                         className="post-review-button"
                         modalComponent={
@@ -83,7 +122,11 @@ function AlbumComponent({ id }) {
           })}
       </div>
       <hr />
-      <ReviewsComponent reviews={reviews && reviews} id={albumID} />
+      <ReviewsComponent
+        reviews={reviews && reviews}
+        id={albumID}
+        title={albumTitle}
+      />
     </>
   );
 }

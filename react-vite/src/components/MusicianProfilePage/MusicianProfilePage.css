@@ -1,110 +1,113 @@
-.centred{
- text-align: center;
+.centred {
+  text-align: center;
 }
 
-.bio-page_grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "a b c"
-                         "a d e";
+.bio-page_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "a b c"
+    "a d e";
 }
 
-.musician-photo{
+/* .musician-photo{
 
-/* background-color: rgba(165, 42, 42, 0.275); */
+background-color: rgba(165, 42, 42, 0.275);
+} */
+
+.musician-photo {
+  width: 20%;
+  /* background-color: rgba(165, 42, 42, 0.275); */
 }
 
-.photocard{
-    grid-area: a;
+.photocard {
+  grid-area: a;
 }
 
-.musician-name{
-grid-area: b;
-/* background-color: rgba(165, 42, 42, 0.275); */
-
+.musician-name {
+  grid-area: b;
+  /* background-color: rgba(165, 42, 42, 0.275); */
 }
 
-.musician-description{
-grid-area: d;
-/* background-color: rgba(165, 42, 42, 0.275); */
-
+.musician-description {
+  grid-area: d;
+  /* background-color: rgba(165, 42, 42, 0.275); */
 }
 
-.star-rating{
-grid-area: c;
-text-align: end;
-/* background-color: rgba(165, 42, 42, 0.275); */
-
+.star-rating {
+  grid-area: c;
+  text-align: end;
+  /* background-color: rgba(165, 42, 42, 0.275); */
 }
 
-.musician-buttons{
-    display: flex;
-    justify-content: center;
-    gap: 1em;
+.musician-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
 }
 
-.showbutton{
-    visibility: hidden;
+.showbutton {
+  visibility: hidden;
 }
 
-.recommended-music{
-grid-area: e;
-text-align: end;
+.recommended-music {
+  grid-area: e;
+  text-align: end;
 }
 
-.placeholder-image{
-    width: 10%;
+.placeholder-image {
+  width: 10%;
 }
 
-.album-container{
-    display: flex;
-    gap: 1em;
+.album-container {
+  display: flex;
+  gap: 1em;
 }
-.album-name{
-grid-area: b;
-}
-
-.line{
-/* grid-area: c; */
+.album-name {
+  grid-area: b;
 }
 
-.album-year{
-grid-area: d;
+/* .line {
+  grid-area: c;
+} */
+
+.album-year {
+  grid-area: d;
 }
 
-.number-of-songs{
-grid-area: e;
+.number-of-songs {
+  grid-area: e;
 }
 
-.review-button{
-grid-area: f;
+.review-button {
+  grid-area: f;
 }
 
-.album-image{
-    width: 100%;
+.album-image {
+  width: 100%;
 }
 
-.album-image-container{
-    width: 30%;
+.album-image-container {
+  width: 30%;
 }
 
-.album-details-container{
-    width: 70%;
+.album-details-container {
+  width: 70%;
 }
 
-.number-and-review{
-    display: flex;
-    justify-content: space-between;
+.number-and-review {
+  display: flex;
+  justify-content: space-between;
 }
 
-.all-albums-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    gap: 2em;
+.all-albums-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 2em;
 }
 
-.songList{
-    display: flex;
-    justify-content: space-between;
+.songList {
+  display: flex;
+  justify-content: space-between;
 }

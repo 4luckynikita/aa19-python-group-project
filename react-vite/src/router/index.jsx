@@ -9,6 +9,10 @@ import HomePage from "../components/HomePage/HomePage";
 import MusicianProfilePage from "../components/MusicianProfilePage/MusicianProfilePage";
 import LandingPage from "../components/LandingPage";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import EditMusicianForm from "../components/EditMusicianForm/EditMusicianForm";
+import CreateAlbumForm from "../components/CreateAlbumForm.jsx";
+import EditAlbumForm from "../components/EditAlbumForm/EditAlbumForm.jsx";
+import CreateSongPage from "../components/SongsComponent/CreateSongPage.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +67,38 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <MusicianProfilePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "musicians/:id/edit",
+        element: (
+          <ProtectedRoute>
+            <EditMusicianForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "albums/new",
+        element: (
+          <ProtectedRoute>
+            <CreateAlbumForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "albums/:id/update",
+        element: (
+          <ProtectedRoute>
+            <EditAlbumForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "albums/:id/songs",
+        element: (
+          <ProtectedRoute>
+            <CreateSongPage />
           </ProtectedRoute>
         ),
       },
