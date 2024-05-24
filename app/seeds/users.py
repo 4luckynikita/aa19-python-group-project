@@ -12,7 +12,7 @@ def seed_users():
         first_name="Demo",
         last_name="Last",
         description="Demo Demo Demo",
-        image_url="/beatratespeechbubble.jpg",
+        image_url="http://example.com/images/demo_musician.jpg",
     )
     demo_musician = User(
         name="Demo Musician",
