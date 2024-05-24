@@ -47,7 +47,7 @@ function Navigation() {
             <ul className="dropdown-menu">
               {artists &&
                 artists?.map((artist) => (
-                  <li key={artist} className="artist-dropdown-li">
+                  <li key={artist.id} className="artist-dropdown-li">
                     <NavLink
                       to={`/musicians/${artist?.id}`}
                       onClick={toggleDropdown}
