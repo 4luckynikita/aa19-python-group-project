@@ -4,6 +4,7 @@ import { thunkLogin } from "../../redux/session";
 import "./LandingPage.css";
 import { useState, useEffect } from "react";
 import clickSound from "/rock2.mp3";
+import { fetchMusicians } from "../../redux/musicians";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const LandingPage = () => {
     if (serverResponse && serverResponse.errors) {
       setErrors(serverResponse.errors);
     }
+    dispatch(fetchMusicians());
   };
 
   const handleDemoUser = async () => {
@@ -41,6 +43,8 @@ const LandingPage = () => {
     if (serverResponse && serverResponse.errors) {
       setErrors(serverResponse.errors);
     }
+
+    dispatch(fetchMusicians());
   };
 
   const handleDemoMusician = async () => {
@@ -51,6 +55,7 @@ const LandingPage = () => {
     if (serverResponse && serverResponse.errors) {
       setErrors(serverResponse.errors);
     }
+    dispatch(fetchMusicians());
   };
 
   return (
@@ -64,7 +69,7 @@ const LandingPage = () => {
           />
         </div>
         <div className="login-container">
-          <h1>Back for an Encore!?</h1>
+          <h1>Back for an Encore?</h1>
           <form onSubmit={handleSubmit}>
             <label>
               <input
