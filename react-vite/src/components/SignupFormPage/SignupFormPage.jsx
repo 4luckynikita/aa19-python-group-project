@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const sessionUser = useSelector((state) => state.session.user);
 
   const [username, setUsername] = useState("");
@@ -15,10 +16,17 @@ function SignupFormPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isMusician, setIsMusician] = useState(false);
+  const [name, setName] = useState("");
   const [genre, setGenre] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const type = params.get("type");
+    setIsMusician(type === "musician");
+  }, [location.search]);
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
@@ -32,19 +40,25 @@ function SignupFormPage() {
       });
     }
 
-    const serverResponse = await dispatch(
-      thunkSignup({
-        email,
-        username,
-        password,
-        first_name: firstName,
-        last_name: lastName,
-        is_musician: isMusician,
-        genre,
-        description,
-        image_url: imageUrl,
-      })
-    );
+    const userData = {
+      email,
+      password,
+      is_musician: isMusician,
+      description,
+      image_url: imageUrl,
+    };
+
+    if (isMusician) {
+      userData.name = name;
+      userData.genre = genre;
+    } else {
+      userData.username = username;
+      userData.first_name = firstName;
+      userData.last_name = lastName;
+    }
+
+    const serverResponse = await dispatch(thunkSignup(userData));
+    // console.log(serverResponse);
 
     if (serverResponse) {
       setErrors(serverResponse);
@@ -68,16 +82,62 @@ function SignupFormPage() {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
+
+        {isMusician ? (
+          <>
+            <label>
+              Musician/Band Name
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </label>
+            {errors.name && <p>{errors.name}</p>}
+            <label>
+              Genre
+              <input
+                type="text"
+                value={genre}
+                onChange={(e) => setGenre(e.target.value)}
+                required
+              />
+            </label>
+          </>
+        ) : (
+          <>
+            <label>
+              Username
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </label>
+            {errors.username && <p>{errors.username}</p>}
+            <label>
+              First Name
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              Last Name
+              <input
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </label>
+          </>
+        )}
+
         <label>
           Password
           <input
@@ -97,54 +157,26 @@ function SignupFormPage() {
             required
           />
         </label>
-        <div>
-          <label>First Name:</label>
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Last Name:</label>
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Musician:</label>
-          <input
-            type="checkbox"
-            checked={isMusician}
-            onChange={(e) => setIsMusician(e.target.checked)}
-          />
-        </div>
-        <div>
-          <label>Genre:</label>
-          <input
-            type="text"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Description:</label>
+        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+
+        <label>
+          Description
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
           />
-        </div>
-        <div>
-          <label>Image URL:</label>
+        </label>
+        <label>
+          Image URL
           <input
             type="text"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
+            required
           />
-        </div>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        </label>
+
         <button type="submit">Sign Up</button>
       </form>
     </>

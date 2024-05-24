@@ -19,7 +19,7 @@ def login():
     form = LoginForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        # Add the user to the session, we are logged in!
+       
         user = User.query.filter(User.email == form.data["email"]).first()
         login_user(user)
         return user.to_dict()
@@ -37,17 +37,23 @@ def sign_up():
     form = SignUpForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        user = User(
-            username=form.data["username"],
-            email=form.data["email"],
-            password=form.data["password"],
-            first_name=form.data["first_name"],
-            last_name=form.data["last_name"],
-            is_musician=form.data["is_musician"],
-            genre=form.data["genre"],
-            description=form.data["description"],
-            image_url=form.data["image_url"],
-        )
+        user_data = {
+            "email": form.data["email"],
+            "password": form.data["password"],
+            "is_musician": form.data["is_musician"],
+            "description": form.data["description"],
+            "image_url": form.data["image_url"],
+        }
+
+        if form.data["is_musician"]:
+            user_data["name"] = form.data["name"]
+            user_data["genre"] = form.data["genre"]
+        else:
+            user_data["username"] = form.data["username"]
+            user_data["first_name"] = form.data["first_name"]
+            user_data["last_name"] = form.data["last_name"]
+
+        user = User(**user_data)
         db.session.add(user)
         db.session.commit()
         login_user(user)

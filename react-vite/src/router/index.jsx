@@ -7,14 +7,28 @@ import EditUserForm from "../components/EditUserForm";
 import EditReviewForm from "../components/EditReviewForm";
 import HomePage from "../components/HomePage/HomePage";
 import MusicianProfilePage from "../components/MusicianProfilePage/MusicianProfilePage";
+import LandingPage from "../components/LandingPage";
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import EditMusicianForm from "../components/EditMusicianForm/EditMusicianForm";
+import CreateAlbumForm from "../components/CreateAlbumForm.jsx";
+import EditAlbumForm from "../components/EditAlbumForm/EditAlbumForm.jsx";
+import CreateSongPage from "../components/SongsComponent/CreateSongPage.jsx";
 
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       {
+        path: "/landing",
+        element: <LandingPage />,
+      },
+      {
         path: "/",
-        element: <HomePage />,
+        element: (
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "login",
@@ -26,23 +40,67 @@ export const router = createBrowserRouter([
       },
       {
         path: "users/:id",
-        element: <UserProfilePage />,
+        element: (
+          <ProtectedRoute>
+            <UserProfilePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "users/:id/edit",
-        element: <EditUserForm />,
+        element: (
+          <ProtectedRoute>
+            <EditUserForm />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "reviews/:reviewId/edit",
-        element: <EditReviewForm />,
-      },
-      {
-        path: "users/:id/edit",
-        element: <EditUserForm />,
+        element: (
+          <ProtectedRoute>
+            <EditReviewForm />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "musicians/:id",
-        element: <MusicianProfilePage />,
+        element: (
+          <ProtectedRoute>
+            <MusicianProfilePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "musicians/:id/edit",
+        element: (
+          <ProtectedRoute>
+            <EditMusicianForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "albums/new",
+        element: (
+          <ProtectedRoute>
+            <CreateAlbumForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "albums/:id/update",
+        element: (
+          <ProtectedRoute>
+            <EditAlbumForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "albums/:id/songs",
+        element: (
+          <ProtectedRoute>
+            <CreateSongPage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

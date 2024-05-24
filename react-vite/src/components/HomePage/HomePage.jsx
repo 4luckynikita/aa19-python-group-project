@@ -17,9 +17,9 @@ const HomePage = () => {
   let randInt = 4;
   //   console.log(albumState?.albums);
 
-  //   albumState &&
-  //     albumState?.albums?.length &&
-  //     (randInt = Math.floor(Math.random() * albumState?.albums?.length));
+  // albumState &&
+  //   albumState?.albums?.length &&
+  //   (randInt = Math.floor(Math.random() * albumState?.albums?.length));
 
   //   console.log(randInt);
   //console.log([...albumState?.albums].sort((a, b) => new Date(b.release_date) - new Date(a.release_date)))

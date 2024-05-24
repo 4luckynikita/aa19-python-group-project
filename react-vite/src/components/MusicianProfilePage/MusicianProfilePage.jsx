@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchCurrentMusician } from "../../redux/musicians";
 import { FaFacebook } from "react-icons/fa";
 import { FaSoundcloud } from "react-icons/fa";
@@ -12,6 +12,7 @@ import "./MusicianProfilePage.css";
 
 function MusicianProfilePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const sessionUser = useSelector((state) => state.session.user);
   const { id } = useParams();
 
@@ -23,8 +24,11 @@ function MusicianProfilePage() {
   // console.log(musician)
 
   let showButton = false;
-  if (sessionUser.id == id && sessionUser.is_musician == true) {
-    showButton = true;
+  if (musician) {
+    if (sessionUser.id == id && sessionUser.is_musician == true) {
+      // console.log(id)
+      showButton = true;
+    }
   }
 
   return (
@@ -38,7 +42,7 @@ function MusicianProfilePage() {
               src={
                 musician && musician.image_url
                   ? `${musician.image_url}`
-                  : "aa19-python-group-project/react-vite/public/placeholder.png"
+                  : "/beatratespeechbubble.jpg"
               }
               alt="artist's/band's photo"
             />
@@ -81,13 +85,15 @@ function MusicianProfilePage() {
         </div>
         {showButton && (
           <div className="musician-buttons">
-            <button>add album</button>
-            <button>edit profile</button>
+            <button onClick={() => navigate(`/albums/new`)}>add album</button>
+            <button onClick={() => navigate(`/musicians/${id}/edit`)}>
+              edit profile
+            </button>
           </div>
         )}
       </div>
       <hr />
-      <AlbumComponent id={id} />
+      <AlbumComponent id={id} key={id} />
     </>
   );
 }

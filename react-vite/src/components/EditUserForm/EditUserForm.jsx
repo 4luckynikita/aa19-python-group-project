@@ -17,6 +17,7 @@ const EditUserForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isMusician, setIsMusician] = useState(false);
+  const [name, setName] = useState("");
   const [genre, setGenre] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -28,6 +29,7 @@ const EditUserForm = () => {
       setFirstName(user.first_name || "");
       setLastName(user.last_name || "");
       setIsMusician(user.is_musician || false);
+      setName(user.name || "");
       setGenre(user.genre || "");
       setDescription(user.description || "");
       setImageUrl(user.image_url || "");
@@ -40,17 +42,24 @@ const EditUserForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = {
-      username,
       email,
       password,
-      first_name: firstName,
-      last_name: lastName,
       is_musician: isMusician,
-      genre,
       description,
       image_url: imageUrl,
     };
+
+    if (isMusician) {
+      formData.name = name;
+      formData.genre = genre;
+    } else {
+      formData.username = username;
+      formData.first_name = firstName;
+      formData.last_name = lastName;
+    }
+
     const updatedUser = await dispatch(updateUser(id, formData));
     if (updatedUser) {
       navigate(`/users/${id}/`);
@@ -62,72 +71,113 @@ const EditUserForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <input
-        type="text"
-        name="first_name"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        placeholder="First Name"
-      />
-      <input
-        type="text"
-        name="last_name"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-        placeholder="Last Name"
-      />
       <label>
-        Musician
+        Email
         <input
-          type="checkbox"
-          name="is_musician"
-          checked={isMusician}
-          onChange={(e) => setIsMusician(e.target.checked)}
+          type="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          required
         />
       </label>
-      <input
-        type="text"
-        name="genre"
-        value={genre}
-        onChange={(e) => setGenre(e.target.value)}
-        placeholder="Genre"
-      />
-      <textarea
-        name="description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
-      />
-      <input
-        type="text"
-        name="image_url"
-        value={imageUrl}
-        onChange={(e) => setImageUrl(e.target.value)}
-        placeholder="Image URL"
-      />
+
+      {isMusician ? (
+        <>
+          <label>
+            Musician/Band Name
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Musician/Band Name"
+              required
+            />
+          </label>
+          <label>
+            Genre
+            <input
+              type="text"
+              name="genre"
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+              placeholder="Genre"
+              required
+            />
+          </label>
+        </>
+      ) : (
+        <>
+          <label>
+            Username
+            <input
+              type="text"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+              required
+            />
+          </label>
+          <label>
+            First Name
+            <input
+              type="text"
+              name="first_name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First Name"
+              required
+            />
+          </label>
+          <label>
+            Last Name
+            <input
+              type="text"
+              name="last_name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last Name"
+              required
+            />
+          </label>
+        </>
+      )}
+
+      <label>
+        Password
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+      </label>
+
+      <label>
+        Description
+        <textarea
+          name="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+          required
+        />
+      </label>
+      <label>
+        Image URL
+        <input
+          type="text"
+          name="image_url"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+          placeholder="Image URL"
+          required
+        />
+      </label>
       <button type="submit">Update User</button>
     </form>
   );

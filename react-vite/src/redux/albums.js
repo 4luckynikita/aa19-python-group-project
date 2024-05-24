@@ -3,6 +3,102 @@ const GET_ALBUMS_SUCCESS = "albums/GET_ALBUMS_SUCCESS";
 const GET_ALBUMS_FAILURE = "albums/GET_ALBUMS_FAILURE";
 const GET_ALL_ALBUMS = "albumsReducer/GET_ALL_ALBUMS";
 const GET_ALBUMS = "album/getAlbums";
+const CREATE_ALBUM = "album/newAlbum";
+
+const createAlbum = (album) => ({
+  type: CREATE_ALBUM,
+  payload: album,
+});
+
+export const createAnAlbum = (formData) => async (dispatch) => {
+  // console.log(JSON.stringify(formData))
+  const response = await fetch(`/api/albums/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  });
+  if (response.ok) {
+    const data = getAllAlbums();
+    const newAlbum = await response.json();
+    dispatch(getAlbums2(data));
+    dispatch(createAlbum(newAlbum));
+    return newAlbum;
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages;
+  } else {
+    return { server: "Something went wrong. Please try again" };
+  }
+};
+
+export const CreateSong = (formData, id) => async (dispatch) => {
+  // console.log(JSON.stringify(formData))
+  const response = await fetch(`/api/songs/albums/${id}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  });
+  if (response.ok) {
+    const data = getAllAlbums();
+    const newAlbum = await response.json();
+    dispatch(getAlbums2(data));
+    return newAlbum;
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages;
+  } else {
+    return { server: "Something went wrong. Please try again" };
+  }
+};
+
+export const deleteAlbum = (id) => async () => {
+  const res = await fetch(`/api/albums/${id}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  const deleted = await res.json();
+  return deleted;
+};
+
+export const editAlbum = (id, formData) => async () => {
+  try {
+    const response = await fetch(`/api/albums/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to update album");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const deleteSong = (id) => async () => {
+  const res = await fetch(`/api/songs/${id}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  const deleted = await res.json();
+  // dispatch(fetchCurrentMusician(userId));
+  return deleted;
+};
+
+export const musicianAlbumsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_ALBUMS:
+      return { ...state, albums: action.payload };
+    case CREATE_ALBUM:
+      return { newAlbum: action.payload };
+    default:
+      return state;
+  }
+};
 
 const getAlbumsRequest = () => ({ type: GET_ALBUMS_REQUEST });
 const getAlbumsSuccess = (albums) => ({
@@ -64,6 +160,7 @@ const initialState = {
   loading: false,
   error: null,
   albums: [],
+  newAlbum: [],
 };
 
 const albumsReducer = (state = initialState, action) => {

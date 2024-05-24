@@ -2,7 +2,7 @@ function SongsComponent({ songs }) {
   // console.log(songs)
   return (
     <>
-      <h1>songsList</h1>
+      <h1>Songs</h1>
       <ol>
         {songs &&
           songs.map((song) => {
