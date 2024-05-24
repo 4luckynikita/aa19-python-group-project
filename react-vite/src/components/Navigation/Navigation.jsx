@@ -22,7 +22,7 @@ function Navigation() {
     setIsOpen(!isOpen);
   };
 
-  console.log(artists);
+  // console.log(artists);
 
   return (
     <ul className="navbar">
