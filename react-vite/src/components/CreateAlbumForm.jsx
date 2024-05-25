@@ -66,6 +66,7 @@ const CreateAlbumForm = () => {
           name="release_date"
           value={release_date}
           onChange={(e) => setRelease_date(e.target.value)}
+          onFocus={(e) => e.target.showPicker()}
           placeholder="Release Date"
           required
         />
