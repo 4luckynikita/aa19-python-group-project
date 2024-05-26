@@ -7,11 +7,14 @@ const EditReviewForm = () => {
   const { reviewId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const review = useSelector((state) => state?.users?.reviews[reviewId]);
+  const reviews = useSelector((state) => state.users.reviews);
+  const review = reviews.find((r) => r.id === parseInt(reviewId));
   const user = useSelector((state) => state.session.user);
 
   const [rating, setRating] = useState(review?.rating || 0);
   const [comment, setComment] = useState(review?.comment || "");
+
+  // console.log("zzzzzzzzzzzzzzzzzzzzzzzzz", review);
 
   useEffect(() => {
     dispatch(getReview(reviewId));

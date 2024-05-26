@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField
-from wtforms.validators import DataRequired, Email, ValidationError, Optional
+from wtforms import StringField, BooleanField, PasswordField, TextAreaField
+from wtforms.validators import DataRequired, Email, Length, ValidationError, Optional, Regexp
 from app.models import User
 
 def user_exists(form, field):
@@ -16,13 +16,13 @@ def username_exists(form, field):
         raise ValidationError("Username is already in use.")
 
 class SignUpForm(FlaskForm):
-    username = StringField("username", validators=[Optional(), username_exists])
-    email = StringField("email", validators=[DataRequired(), user_exists])
-    password = StringField("password", validators=[DataRequired()])
-    name = StringField('name', validators=[Optional()])
-    first_name = StringField("first_name", validators=[Optional()])
-    last_name = StringField("last_name", validators=[Optional()])
+    username = StringField("username", validators=[Optional(), Length(min=3, max=25), username_exists])
+    email = StringField("email", validators=[DataRequired(), Email(), Length(min=6, max=255), Regexp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$'), user_exists])
+    password = PasswordField("password", validators=[DataRequired(), Length(min=8, max=255)])
+    name = StringField('name', validators=[Optional(), Length(min=1, max=100)])
+    first_name = StringField("first_name", validators=[Optional(), Length(min=1, max=50)])
+    last_name = StringField("last_name", validators=[Optional(), Length(min=1, max=50)])
     is_musician = BooleanField("is_musician")
-    genre = StringField("genre", validators=[Optional()])
-    description = StringField("description", validators=[DataRequired()])
-    image_url = StringField("image_url", validators=[DataRequired()])
+    genre = StringField("genre", validators=[Optional(), Length(min=1, max=50)])
+    description = TextAreaField("description", validators=[DataRequired(), Length(min=10, max=1000)])
+    image_url = StringField("image_url", validators=[DataRequired(), Length(max=255)])
