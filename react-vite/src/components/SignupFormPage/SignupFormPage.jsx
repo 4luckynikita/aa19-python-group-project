@@ -77,7 +77,12 @@ function SignupFormPage() {
       userData.last_name = lastName;
     }
 
+    console.log("xxxxxxxxxxxxxxxx", userData);
+
     const serverResponse = await dispatch(thunkSignup(userData));
+
+    console.log("zzzzzzzzzzzzzzzzzzzz", serverResponse);
+
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
