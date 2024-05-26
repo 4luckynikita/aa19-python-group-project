@@ -1,43 +1,16 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
-// import { getUser, updateUser } from "../../redux/users";
-import { editAlbum, fetchAlbums } from "../../redux/albums";
-// import SongsComponent from "../MusicianProfilePage/song";
-import CreateSongForm from "../SongsComponent/SongForm";
-import { MdDelete } from "react-icons/md";
-import { deleteSong } from "../../redux/albums";
-// import DeleteSongModal from "../MusicianProfilePage/deleteSongModal";
+import { useDispatch } from "react-redux";
+import { editAlbum } from "../../redux/albums";
+import AddSongForm from "./AddSong";
 
-const EditAlbumForm = () => {
-  const { id } = useParams();
+const EditAlbumForm = ({ id, data }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector((state) => state.session.user);
+
   const [title, setTitle] = useState("");
   const [release_date, setRelease_date] = useState("");
   const [description, setDescription] = useState("");
   const [image_url, setImageUrl] = useState("");
   const [addSong, setAddsong] = useState(false);
-  const location = useLocation();
-  const data = location.state;
-  const [songsArray, setSongsArray] = useState([]);
-  const currentUser = useSelector((state) => state.session.user);
-
-  //   console.log(data)
-  // const id = data.id
-  // console.log(data)
-  // // console.log(data.release_date)
-  // let day = new Date(data.release_date).getDate()
-  // day.length < 2? day= day.padStart(2, 0) : day= day
-  // const year = new Date(data.release_date).getFullYear()
-  // let month = new Date(data.release_date).getMonth()
-  // month.length < 2? month= month.padStart(2, 0) : month= month
-  // const newDate = `${year}-${month}-${day}`
-  // // console.log(newDate)
-  useEffect(() => {
-    setSongsArray(data.songs);
-  }, [data]);
 
   useEffect(() => {
     if (data) {
@@ -45,7 +18,7 @@ const EditAlbumForm = () => {
       setDescription(data.description || "");
       setImageUrl(data.image_url || "");
     }
-  }, [data]);
+  }, [data, id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,32 +31,18 @@ const EditAlbumForm = () => {
     const updatedAlbum = await dispatch(editAlbum(id, formData));
 
     if (updatedAlbum) {
-      dispatch(fetchAlbums(user.id));
+      alert(`you album has been updated`);
+      setTitle(updatedAlbum.title || "");
+      setDescription(updatedAlbum.description || "");
+      setImageUrl(updatedAlbum.image_url || "");
+      // dispatch(fetchAlbums(user.id));
     }
-  };
-
-  const redirect = (e) => {
-    // console.log('hi')
-    e.preventDefault();
-    navigate(`/musicians/${user.id}/`);
   };
 
   const handleClick = (e) => {
     // console.log('hi')
     e.preventDefault();
     setAddsong(true);
-  };
-  console.log(addSong);
-  //   if (loading) return <div>Loading...</div>;
-  //   if (error) return <div>Error: {error}</div>;
-
-  const handleDelete = async (id) => {
-    // e.preventDefault()
-    const deletedSong = await dispatch(deleteSong(id, currentUser.id));
-    if (deletedSong) {
-      console.log(data.songs);
-      setSongsArray(data.songs);
-    }
   };
 
   return (
@@ -120,26 +79,12 @@ const EditAlbumForm = () => {
         />
         <button type="submit">Update Album</button>
       </form>
-      {songsArray.map((song) => (
-        <ol key={song.id}>
-          <li>
-            {song.title}{" "}
-            <MdDelete
-              onClick={(e) => {
-                e.preventDefault();
-                handleDelete(song.id);
-              }}
-            />
-          </li>
-        </ol>
-      ))}
       {addSong && (
         <div>
-          <CreateSongForm />
+          <AddSongForm />
         </div>
       )}
       <button onClick={handleClick}>add more songs to your album</button>
-      <button onClick={redirect}>done</button>
     </>
   );
 };

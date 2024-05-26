@@ -30,14 +30,34 @@ function SignupFormPage() {
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
+  const validateEmail = (email) => {
+    const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    return regex.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const newErrors = {};
+    if (!validateEmail(email)) {
+      newErrors.email = "Invalid email format.";
+    }
+    if (password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters.";
+    }
     if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
+      newErrors.confirmPassword =
+        "Confirm Password field must be the same as the Password field.";
+    }
+    if (username.length < 3 || username.length > 25) {
+      newErrors.username = "Username must be between 3 and 25 characters.";
+    }
+    if (description.length < 10 || description.length > 1000) {
+      newErrors.description =
+        "Description must be between 10 and 1000 characters.";
+    }
+    if (Object.keys(newErrors).length > 0) {
+      return setErrors(newErrors);
     }
 
     const userData = {
@@ -58,8 +78,6 @@ function SignupFormPage() {
     }
 
     const serverResponse = await dispatch(thunkSignup(userData));
-    // console.log(serverResponse);
-
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
@@ -167,6 +185,7 @@ function SignupFormPage() {
             required
           />
         </label>
+        {errors.description && <p>{errors.description}</p>}
         <label>
           Image URL
           <input
@@ -176,6 +195,7 @@ function SignupFormPage() {
             required
           />
         </label>
+        {errors.imageUrl && <p>{errors.imageUrl}</p>}
 
         <button type="submit">Sign Up</button>
       </form>

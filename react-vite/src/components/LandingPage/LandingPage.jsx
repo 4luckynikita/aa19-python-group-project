@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkLogin } from "../../redux/session";
 import "./LandingPage.css";
 import { useState, useEffect } from "react";
+import clickSound from "/rock2.mp3";
+import { fetchMusicians } from "../../redux/musicians";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -11,6 +13,7 @@ const LandingPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const audio = new Audio(clickSound);
 
   useEffect(() => {
     if (sessionUser) {
@@ -24,28 +27,35 @@ const LandingPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    audio.play();
     const serverResponse = await dispatch(thunkLogin({ email, password }));
     if (serverResponse && serverResponse.errors) {
       setErrors(serverResponse.errors);
     }
+    dispatch(fetchMusicians());
   };
 
   const handleDemoUser = async () => {
+    audio.play();
     const serverResponse = await dispatch(
       thunkLogin({ email: "demo@aa.io", password: "password" })
     );
     if (serverResponse && serverResponse.errors) {
       setErrors(serverResponse.errors);
     }
+
+    dispatch(fetchMusicians());
   };
 
   const handleDemoMusician = async () => {
+    audio.play();
     const serverResponse = await dispatch(
       thunkLogin({ email: "demo@musician.com", password: "password" })
     );
     if (serverResponse && serverResponse.errors) {
       setErrors(serverResponse.errors);
     }
+    dispatch(fetchMusicians());
   };
 
   return (
@@ -59,7 +69,7 @@ const LandingPage = () => {
           />
         </div>
         <div className="login-container">
-          <h1>Back for an Encore !?</h1>
+          <h1>Back for an Encore?</h1>
           <form onSubmit={handleSubmit}>
             <label>
               <input
@@ -83,15 +93,20 @@ const LandingPage = () => {
           </form>
           {errors.email && <p>{errors.email}</p>}
           {errors.password && <p>{errors.password}</p>}
-          <p>Don&apos;t want to create an account?</p>
-          <button onClick={handleDemoUser}>Login as Demo User</button>
-          {" | "}
-          <button onClick={handleDemoMusician}>Login as Demo Musician</button>
+          <p id="ready">Ready to Rock? Sign up as</p>
+          <div id="signup">
+            <Link to="/signup?type=user">User</Link>
+            {" | "}
+            <Link to="/signup?type=musician">Musician</Link>
+          </div>
           <p>Or</p>
-          <p>Ready to Rock? Sign up as</p>
-          <Link to="/signup?type=user">User</Link>
-          {" | "}
-          <Link to="/signup?type=musician">Musician</Link>
+          <p className="demotitle">Don&apos;t want to create an account?</p>
+          <button className="demobutton" onClick={handleDemoUser}>
+            Login as Demo User
+          </button>
+          <button className="demobutton" onClick={handleDemoMusician}>
+            Login as Demo Musician
+          </button>
         </div>
       </div>
     </div>
