@@ -10,10 +10,10 @@ const ReviewMicrophones = ({ stars }) => {
   return (
     <div className="stars-component-container">
       {starsArr &&
-        starsArr.map((star) => {
+        starsArr.map((star, index) => {
           return (
             <img
-              key={star}
+              key={index}
               src={`${
                 star
                   ? "https://res.cloudinary.com/dkxfjbynk/image/upload/v1716585708/79fd5b87-0692-498d-b0f2-6aed85802645.png"

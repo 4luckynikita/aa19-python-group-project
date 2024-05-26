@@ -14,15 +14,6 @@ def seed_users():
         description="Demo Demo Demo",
         image_url="https://upload.wikimedia.org/wikipedia/commons/6/66/SmileyFace.png",
     )
-    demo_musician = User(
-        name="Demo Musician",
-        is_musician=True,
-        email="demo@musician.com",
-        password="password",
-        genre="Rock",
-        description="I am a demo musician",
-        image_url="http://example.com/images/demo_musician.jpg",
-    )
     marnie = User(
         username="marnie",
         is_musician=False,
@@ -181,6 +172,16 @@ def seed_users():
         genre="Funk Rock",
         description="Band known for their fusion of rock, funk, and punk.",
         image_url="http://example.com/images/rhcp.jpg",
+    )
+    
+    demo_musician = User(
+        name="Demo Musician",
+        is_musician=True,
+        email="demo@musician.com",
+        password="password",
+        genre="Rock",
+        description="I am a demo musician",
+        image_url="https://upload.wikimedia.org/wikipedia/commons/6/66/SmileyFace.png",
     )
 
     db.session.add_all(

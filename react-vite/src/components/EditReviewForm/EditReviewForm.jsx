@@ -7,14 +7,14 @@ const EditReviewForm = () => {
   const { reviewId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const review = useSelector((state) => state?.users?.reviews[reviewId]);
-  const user = useSelector((state) => state?.session?.user);
-  const loading = useSelector((state) => state?.reviews?.loading);
-  const error = useSelector((state) => state?.reviews?.error);
-  // console.log("zzzzzzzzzzzzzzzzzzzzzzz", review);
+  const reviews = useSelector((state) => state.users.reviews);
+  const review = reviews.find((r) => r.id === parseInt(reviewId));
+  const user = useSelector((state) => state.session.user);
 
   const [rating, setRating] = useState(review?.rating || 0);
   const [comment, setComment] = useState(review?.comment || "");
+
+  // console.log("zzzzzzzzzzzzzzzzzzzzzzzzz", review);
 
   useEffect(() => {
     dispatch(getReview(reviewId));
@@ -31,29 +31,18 @@ const EditReviewForm = () => {
     e.preventDefault();
     const updatedReview = {
       ...review,
-      rating: Number(rating),
+      rating,
       comment,
     };
     await dispatch(updateReview(reviewId, updatedReview));
     navigate(`/users/${user && user.id}`);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <label>
         Rating:
-        <select
-          value={rating}
-          onChange={(e) => setRating(Number(e.target.value))}
-        >
+        <select value={rating} onChange={(e) => setRating(e.target.value)}>
           {[1, 2, 3, 4, 5].map((rate) => (
             <option key={rate} value={rate}>
               {rate}
