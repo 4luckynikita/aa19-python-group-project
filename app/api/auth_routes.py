@@ -9,6 +9,7 @@ auth_routes = Blueprint("auth", __name__)
 
 @auth_routes.route("/")
 def authenticate():
+    print(current_user)
     if current_user.is_authenticated:
         return current_user.to_dict()
     return {"errors": {"message": "Unauthorized"}}, 401
@@ -19,7 +20,7 @@ def login():
     form = LoginForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-       
+
         user = User.query.filter(User.email == form.data["email"]).first()
         login_user(user)
         return user.to_dict()
