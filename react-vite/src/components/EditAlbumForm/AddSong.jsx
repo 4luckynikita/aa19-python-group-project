@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { CreateSong, fetchAlbums } from "../../redux/albums";
+import { useParams } from "react-router-dom";
+import { CreateSong, fetchAlbums, fetchCurrentAlbum } from "../../redux/albums";
 
-function CreateSongForm() {
+function AddSongForm() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState("");
   const [duration, setDuration] = useState("");
-
   const { id } = useParams();
   const reset = () => {
     setTitle("");
@@ -28,7 +27,8 @@ function CreateSongForm() {
       console.log("===========>", "yes");
       reset();
       dispatch(fetchAlbums(sessionUser.id));
-      navigate(`/musicians/${sessionUser.id}/`);
+      dispatch(fetchCurrentAlbum(id));
+      //  navigate(`/musicians/${sessionUser.id}/`);
     }
   };
 
@@ -54,11 +54,10 @@ function CreateSongForm() {
           placeholder="duration"
           required
         />
-
         <button type="submit">Submit</button>
       </form>
     </>
   );
 }
 
-export default CreateSongForm;
+export default AddSongForm;

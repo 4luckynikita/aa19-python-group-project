@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createAnAlbum, fetchAlbums, fetchCurrentAlbum } from "../redux/albums";
+
 import { useNavigate } from "react-router-dom";
 // import { getUser, updateUser } from "../../redux/users";
-import { createAnAlbum } from "../redux/albums";
 
 const CreateAlbumForm = () => {
   // const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //   const new_album = useSelector((state) => state.musicianalbums);
-  //   const loading = useSelector((state) => state.users.loading);
-  //   const error = useSelector((state) => state.users.error);
+
+  const user = useSelector((state) => state.session.user);
 
   const [title, setTitle] = useState("");
   const [release_date, setRelease_date] = useState("");
@@ -39,9 +39,11 @@ const CreateAlbumForm = () => {
     const createdAlbum = await dispatch(createAnAlbum(formData));
     console.log(createdAlbum);
     if (createdAlbum) {
-      console.log("===========>", "yes");
+      // console.log("===========>", "yes");
       reset();
-      // navigate(`/musicians/${user.id}/`);
+      dispatch(fetchCurrentAlbum(createdAlbum.id));
+      dispatch(fetchAlbums(user.id));
+
       navigate(`/albums/${createdAlbum.id}/songs`);
     }
   };
