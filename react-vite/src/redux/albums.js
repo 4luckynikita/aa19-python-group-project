@@ -4,12 +4,6 @@ const GET_ALBUMS_FAILURE = "albums/GET_ALBUMS_FAILURE";
 const GET_ALL_ALBUMS = "albumsReducer/GET_ALL_ALBUMS";
 const GET_ALBUMS = "album/getAlbums";
 const CREATE_ALBUM = "album/newAlbum";
-const GET_CURRENT_ALBUM = "album/current";
-
-const getCurrentAlbum = (album) => ({
-  type: GET_CURRENT_ALBUM,
-  payload: album,
-});
 
 const createAlbum = (album) => ({
   type: CREATE_ALBUM,
@@ -101,8 +95,6 @@ export const musicianAlbumsReducer = (state = initialState, action) => {
       return { ...state, albums: action.payload };
     case CREATE_ALBUM:
       return { newAlbum: action.payload };
-    case GET_CURRENT_ALBUM:
-      return { ...state, currentAlbum: action.payload };
     default:
       return state;
   }
@@ -133,7 +125,6 @@ export const fetchAlbums = (id) => async (dispatch) => {
   if (response.ok) {
     const albums = await response.json();
     dispatch(getAlbums3(albums));
-    return albums;
   }
 };
 
@@ -165,22 +156,11 @@ export const getAlbums = () => async (dispatch) => {
   }
 };
 
-export const fetchCurrentAlbum = (albumId) => async (dispatch) => {
-  console.log("bbbbbbhiiiiiiiiiii");
-  const res = await fetch(`/api/albums/${albumId}`);
-  if (res.ok) {
-    console.log("hiiiiiiiiiii");
-    const current = await res.json();
-    dispatch(getCurrentAlbum(current));
-  }
-};
-
 const initialState = {
   loading: false,
   error: null,
   albums: [],
   newAlbum: [],
-  currentAlbum: [],
 };
 
 const albumsReducer = (state = initialState, action) => {

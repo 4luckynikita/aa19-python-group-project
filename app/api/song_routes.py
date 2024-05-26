@@ -37,9 +37,9 @@ def delete_song_review(id):
     """
     song = Song.query.get(id)
     if song == None:
-         return {"message": "OOps! looks like your song doesn't exist"}, 404
+        return 'OOps! Looks like this song does not exist', 404
 
 
     db.session.delete(song)
     db.session.commit()
-    return {"message": "Your song has been deleted sucessfully"}, 200
+    return 'your song has been deleted'
