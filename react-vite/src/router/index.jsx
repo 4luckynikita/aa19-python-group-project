@@ -11,7 +11,7 @@ import LandingPage from "../components/LandingPage";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import EditMusicianForm from "../components/EditMusicianForm/EditMusicianForm";
 import CreateAlbumForm from "../components/CreateAlbumForm.jsx";
-import EditAlbumForm from "../components/EditAlbumForm/EditAlbumForm.jsx";
+import EditPage from "../components/EditAlbumForm/EditPage.jsx";
 import CreateSongPage from "../components/SongsComponent/CreateSongPage.jsx";
 
 export const router = createBrowserRouter([
@@ -87,10 +87,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "albums/:id/update",
+        path: "albums/:id/edit",
         element: (
           <ProtectedRoute>
-            <EditAlbumForm />
+            <EditPage />
           </ProtectedRoute>
         ),
       },

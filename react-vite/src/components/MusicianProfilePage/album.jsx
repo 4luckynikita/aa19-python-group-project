@@ -10,10 +10,11 @@ import { MdDelete } from "react-icons/md";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteAlbumModal from "./DeleteAlbumModal";
 import { FaPencil } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AlbumComponent({ id }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [albumTitle, setAlbumTitle] = useState("");
 
   const [albumID, setAlbumID] = useState("");
@@ -48,6 +49,10 @@ function AlbumComponent({ id }) {
   if (!albums || albums.length === 0) {
     return <p>No albums added yet!</p>;
   }
+
+  const handleUpdate = (album) => {
+    navigate(`/albums/${album.id}/edit`, { state: album });
+  };
 
   return (
     <>
@@ -101,9 +106,12 @@ function AlbumComponent({ id }) {
                         )}
                         {/* <MdDeleteForever /> */}
                         {showDeleteButton && (
-                          <Link to={`/albums/${album.id}/update`} state={album}>
-                            <FaPencil />
-                          </Link>
+                          <FaPencil
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleUpdate(album);
+                            }}
+                          />
                         )}
                       </div>
                       <OpenModalButton

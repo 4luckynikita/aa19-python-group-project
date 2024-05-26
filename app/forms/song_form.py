@@ -6,4 +6,4 @@ from wtforms.validators import DataRequired
 class SongForm(FlaskForm):
     title = StringField("title", validators=[DataRequired()])
     duration = IntegerField("release date", validators=[DataRequired()])
-    image_url = URLField("image url", validators=[DataRequired()])
+    image_url = URLField("image url")

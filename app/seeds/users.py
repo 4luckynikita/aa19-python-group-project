@@ -12,16 +12,7 @@ def seed_users():
         first_name="Demo",
         last_name="Last",
         description="Demo Demo Demo",
-        image_url="http://example.com/images/demo_musician.jpg",
-    )
-    demo_musician = User(
-        name="Demo Musician",
-        is_musician=True,
-        email="demo@musician.com",
-        password="password",
-        genre="Rock",
-        description="I am a demo musician",
-        image_url="http://example.com/images/demo_musician.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/commons/6/66/SmileyFace.png",
     )
     marnie = User(
         username="marnie",
@@ -31,7 +22,7 @@ def seed_users():
         first_name="Marnie",
         last_name="Marston",
         description="Music 4 Lyfe!",
-        image_url="http://example.com/images/test.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/commons/6/66/SmileyFace.png",
     )
     bobbie = User(
         username="bobbie",
@@ -41,7 +32,7 @@ def seed_users():
         first_name="Bobbie",
         last_name="Smith",
         description="My favorite genre is METALLICA!",
-        image_url="http://example.com/images/test.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/commons/6/66/SmileyFace.png",
     )
     nikita = User(
         username="nikita",
@@ -51,7 +42,7 @@ def seed_users():
         first_name="Nikita",
         last_name="Kastyshyn",
         description="I'm down with whatever you got!",
-        image_url="http://example.com/images/test.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/commons/6/66/SmileyFace.png",
     )
     erik = User(
         username="erik",
@@ -61,7 +52,7 @@ def seed_users():
         first_name="Erik",
         last_name="Hervall",
         description="Rocker and Roller!!!",
-        image_url="http://example.com/images/test.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/commons/6/66/SmileyFace.png",
     )
     cece = User(
         username="cece",
@@ -71,7 +62,7 @@ def seed_users():
         first_name="Cece",
         last_name="Potakey",
         description="Let's hear some KPOP!",
-        image_url="http://example.com/images/test.jpg",
+        image_url="https://upload.wikimedia.org/wikipedia/commons/6/66/SmileyFace.png",
     )
     the_beatles = User(
         name="The Beatles",
@@ -181,6 +172,16 @@ def seed_users():
         genre="Funk Rock",
         description="Band known for their fusion of rock, funk, and punk.",
         image_url="http://example.com/images/rhcp.jpg",
+    )
+    
+    demo_musician = User(
+        name="Demo Musician",
+        is_musician=True,
+        email="demo@musician.com",
+        password="password",
+        genre="Rock",
+        description="I am a demo musician",
+        image_url="https://upload.wikimedia.org/wikipedia/commons/6/66/SmileyFace.png",
     )
 
     db.session.add_all(
