@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getReview, updateReview } from "../../redux/reviews";
+import "./EditReview.css";
+import StarModalComponent from "../CreateReviewModal/StarModalComponent";
 
 const EditReviewForm = () => {
   const { reviewId } = useParams();
@@ -13,25 +15,23 @@ const EditReviewForm = () => {
 
   const [rating, setRating] = useState(review?.rating || 0);
   const [comment, setComment] = useState(review?.comment || "");
+  const [stars, setStars] = useState(0);
 
-  // console.log("zzzzzzzzzzzzzzzzzzzzzzzzz", review);
+  console.log("zzzzzzzzzzzzzzzzzzzzzzzzz", review);
 
   useEffect(() => {
     dispatch(getReview(reviewId));
-  }, [dispatch, reviewId]);
-
-  useEffect(() => {
     if (review) {
-      setRating(review.rating);
-      setComment(review.comment);
+      setRating(review?.rating);
+      setComment(review?.comment);
     }
-  }, [review]);
+  }, [dispatch, reviewId, review]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedReview = {
       ...review,
-      rating,
+      rating: stars,
       comment,
     };
     await dispatch(updateReview(reviewId, updatedReview));
@@ -39,27 +39,36 @@ const EditReviewForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Rating:
-        <select value={rating} onChange={(e) => setRating(e.target.value)}>
-          {[1, 2, 3, 4, 5].map((rate) => (
-            <option key={rate} value={rate}>
-              {rate}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Comment:
-        <input
-          type="text"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
+    <div className="edit-review-container">
+      <h1>Edit Your Review for {review?.album && review?.album?.title}</h1>
+      <form onSubmit={handleSubmit} className="edit-review-form">
+        <StarModalComponent
+          setStars={setStars}
+          stars={stars}
+          defaultRating={rating}
+          bigMode="true"
         />
-      </label>
-      <button type="submit">Update Review</button>
-    </form>
+        <label className="edit-review-comment-container">
+          <p className="edit-review-p-tag">Comment:</p>
+          <textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            className="edit-review-textbox"
+          />
+        </label>
+        <div className="edit-review-lower-button-container">
+          <button type="submit" className="edit-review-submit-button">
+            Update Review
+          </button>
+          <button
+            className="edit-review-cancel-button"
+            onClick={() => navigate(`/users/${user?.id}`)}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

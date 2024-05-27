@@ -73,7 +73,7 @@ const LandingPage = () => {
           <form onSubmit={handleSubmit}>
             <label>
               <input
-                placeholder="Email / Username"
+                placeholder="Email"
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

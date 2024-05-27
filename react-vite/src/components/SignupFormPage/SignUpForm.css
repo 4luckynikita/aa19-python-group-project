@@ -1,0 +1,86 @@
+.sign-up-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.sign-up-container h1 {
+  font-size: 50px;
+  margin-top: 0px;
+  width: 60%;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.sign-up-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.sign-up-split {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60%;
+  margin-bottom: 20px;
+}
+.sign-up-split p {
+  width: 60%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 25px;
+  margin: 20px 0px;
+}
+.sign-up-split input {
+  margin-left: 20px;
+  width: 60%;
+  color: black;
+  padding: 10px 20px;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 8px;
+}
+.sign-up-split textarea {
+  margin-left: 20px;
+  width: 60%;
+  min-height: 150px;
+  color: black;
+  padding: 20px;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 8px;
+}
+.sign-up-button-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 60%;
+
+  margin-top: 20px;
+
+  margin-bottom: 20px;
+}
+.sign-up-submit-button {
+  padding: 10px 20px;
+  background-color: rgb(52, 176, 164);
+  color: white;
+  border-radius: 20px;
+  border: none;
+  font-size: 19px;
+}
+.sign-up-cancel-button {
+  padding: 10px 20px;
+  background-color: rgb(177, 0, 0);
+  color: white;
+  border-radius: 20px;
+  border: none;
+  font-size: 19px;
+}
+.sign-up-submit-button:hover,
+.sign-up-cancel-button:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 1px 1px white;
+}

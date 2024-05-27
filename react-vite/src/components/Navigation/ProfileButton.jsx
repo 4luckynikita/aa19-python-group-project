@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import "./Navigation.css";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>{user.username}</li>
+              <li>Hello {user.username}!</li>
               <li>{user.email}</li>
               <li>
                 {user.is_musician ? (
@@ -63,6 +64,7 @@ function ProfileButton() {
                       navigate(`/musicians/${user.id}`, { replace: true });
                       closeMenu();
                     }}
+                    className="profile-dropdown-button"
                   >
                     Profile
                   </button>
@@ -72,13 +74,16 @@ function ProfileButton() {
                       navigate(`/users/${user.id}`, { replace: true });
                       closeMenu();
                     }}
+                    className="profile-dropdown-button"
                   >
                     Profile
                   </button>
                 )}
               </li>
               <li>
-                <button onClick={logout}>Log Out</button>
+                <button onClick={logout} className="profile-dropdown-button">
+                  Log Out
+                </button>
               </li>
             </>
           ) : (
@@ -87,11 +92,13 @@ function ProfileButton() {
                 itemText="Log In"
                 onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
+                className="profile-dropdown-button"
               />
               <OpenModalMenuItem
                 itemText="Sign Up"
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
+                className="profile-dropdown-button"
               />
             </>
           )}

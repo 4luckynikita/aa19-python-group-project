@@ -16,11 +16,11 @@ function CreateSongPage() {
   return (
     <>
       <h1>Add Songs To Your Album</h1>
+      <h3>Start by adding your first song</h3>
       <CreateSongForm />
       {/* {songsArray.map((arr)=>{
         return <div>{arr}</div>
       })} */}
-      <button onClick={() => alert("coming soon")}>Add More Songs</button>
       {/* <button onClick={createSong}>Submit</button> */}
     </>
   );

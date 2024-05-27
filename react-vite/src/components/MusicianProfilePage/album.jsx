@@ -16,7 +16,6 @@ function AlbumComponent({ id }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [albumTitle, setAlbumTitle] = useState("");
-
   const [albumID, setAlbumID] = useState("");
   let reviews = [];
   // console.log(id)
@@ -33,15 +32,18 @@ function AlbumComponent({ id }) {
   };
   // let showReviewButton = true;
   let showDeleteButton = false;
+  let showReviewButton = true;
+
+  // if (currentUser) {
+  //   if (currentUser.id == id) {
+  //     // console.log(id)
+  //     showReviewButton = false;
+  //   }
+  // }
   if (currentUser) {
     if (currentUser.id == id) {
       // console.log(id)
-      // showReviewButton = false;
-    }
-  }
-  if (currentUser) {
-    if (currentUser.id == id) {
-      // console.log(id)
+      showReviewButton = false;
       showDeleteButton = true;
     }
   }
@@ -54,6 +56,10 @@ function AlbumComponent({ id }) {
     navigate(`/albums/${album.id}/edit`, { state: album });
   };
 
+  const rerender = () => {
+    dispatch(fetchAlbums(currentUser.id));
+  };
+
   return (
     <>
       <h1>albums</h1>
@@ -61,7 +67,11 @@ function AlbumComponent({ id }) {
         {albums &&
           albums.map((album) => {
             reviews.push(...album.reviews);
-
+            reviews.map((review) => {
+              if (review.user_id == currentUser.id) {
+                showReviewButton = false;
+              }
+            });
             return (
               <>
                 <div
@@ -101,7 +111,12 @@ function AlbumComponent({ id }) {
                         {showDeleteButton && (
                           <OpenModalMenuItem
                             itemText={<MdDelete />}
-                            modalComponent={<DeleteAlbumModal album={album} />}
+                            modalComponent={
+                              <DeleteAlbumModal
+                                album={album}
+                                rerender={rerender}
+                              />
+                            }
                           />
                         )}
                         {/* <MdDeleteForever /> */}
@@ -114,13 +129,18 @@ function AlbumComponent({ id }) {
                           />
                         )}
                       </div>
-                      <OpenModalButton
-                        className="post-review-button"
-                        modalComponent={
-                          <CreateReviewModal albumId={album.id} />
-                        }
-                        buttonText="Add Your Review!"
-                      />
+                      {showReviewButton && (
+                        <OpenModalButton
+                          className="post-review-button"
+                          modalComponent={
+                            <CreateReviewModal
+                              albumId={album.id}
+                              musicianId={id}
+                            />
+                          }
+                          buttonText="Add Your Review!"
+                        />
+                      )}
                     </div>
                     <SongsComponent songs={album.songs} />
                   </div>

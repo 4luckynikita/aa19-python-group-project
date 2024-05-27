@@ -10,8 +10,12 @@ function Navigation() {
   const dispatch = useDispatch();
   const location = useLocation();
   const sessionUser = useSelector((state) => state.session.user);
-  const showProfileButton = location.pathname !== "/landing";
-  const showArtistButton = sessionUser && location.pathname !== "/landing";
+  const showProfileButton =
+    location.pathname !== "/landing" && location.pathname !== "/signup";
+  const showArtistButton =
+    sessionUser &&
+    location.pathname !== "/landing" &&
+    location.pathname !== "/signup";
   const dropdownRef = useRef(null);
 
   useEffect(() => {

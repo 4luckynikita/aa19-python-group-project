@@ -91,13 +91,7 @@ def seed_albums():
         description="One of the band's most successful albums.",
         image_url="https://upload.wikimedia.org/wikipedia/en/d/df/RedHotChiliPeppersCalifornication.jpg",
     )
-    demo_album = Album(
-        user_id=User.query.filter_by(name="Demo Musician").first().id,
-        title="Demo Title",
-        release_date=date(2011, 4, 19),
-        description="Wow. What an amazing Demo",
-        image_url="/beatratespeechbubble.jpg",
-    )
+    
     
 
     db.session.add_all(
@@ -113,7 +107,7 @@ def seed_albums():
             london_calling,
             the_joshua_tree,
             californication,
-            demo_album,
+            
         ]
     )
     db.session.commit()
