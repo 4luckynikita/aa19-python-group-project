@@ -31,7 +31,10 @@ const HomePage = () => {
         <div className="homepage-featured-container-inner">
           <h1 className="homepage-featured-container-title">Recommended</h1>
           {albumState?.albums && (
-            <NavLink to={`/musicians/${albumState?.albums[randInt]?.user_id}`}>
+            <NavLink
+              className={"navlinkhome"}
+              to={`/musicians/${albumState?.albums[randInt]?.user_id}`}
+            >
               <div className="homepage-featured-image-container">
                 <img
                   src={albumState?.albums[randInt]?.image_url}
@@ -42,7 +45,9 @@ const HomePage = () => {
                   <h1 className="homepage-featured-title">
                     {albumState?.albums[randInt]?.title}
                   </h1>
-                  <h1>{albumState?.albums[randInt]?.musician[0].name}</h1>
+                  <h2 className="homepage-featured-title">
+                    {albumState?.albums[randInt]?.musician[0].name}
+                  </h2>
                   <p className="homepage-featured-description">
                     {albumState?.albums[randInt]?.description}
                   </p>

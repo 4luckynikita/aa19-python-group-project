@@ -6,6 +6,42 @@ import { getAlbums } from "../../redux/albums";
 import { deleteReview } from "../../redux/reviews";
 import ReviewMicrophones from "../ReviewMicrophones/ReviewMicrophones";
 import "./UserProfilePage.css";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import { useModal } from "../../context/Modal";
+
+const DeleteReviewModal = ({ reviewId, id }) => {
+  const { closeModal } = useModal();
+
+  const dispatch = useDispatch();
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    await dispatch(deleteReview(reviewId)).then(closeModal);
+    dispatch(getUserReviews(id));
+  };
+
+  const close = (e) => {
+    e.preventDefault();
+    return closeModal();
+  };
+
+  return (
+    <div className="form-container">
+      <h1 className="black">Confirm Delete</h1>
+      <p className="black">Are you sure you want to delete this review?</p>
+      <div>
+        <button className="delete" onClick={handleClick}>
+          Yes
+        </button>
+      </div>
+      <div>
+        <button className="keep" onClick={close}>
+          No
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const UserProfilePage = () => {
   const { id } = useParams();
@@ -25,10 +61,10 @@ const UserProfilePage = () => {
     dispatch(getAlbums());
   }, [dispatch, id]);
 
-  const handleDeleteReview = async (reviewId) => {
-    await dispatch(deleteReview(reviewId));
-    dispatch(getUserReviews(id));
-  };
+  // const handleDeleteReview = async (reviewId) => {
+  //   await dispatch(deleteReview(reviewId));
+  //   dispatch(getUserReviews(id));
+  // };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -133,7 +169,7 @@ const UserProfilePage = () => {
                         </p>
                       </div>
                       {loggedInUser && loggedInUser.id === review.user_id && (
-                        <div>
+                        <div className="editdeletecontainer">
                           <button
                             onClick={() =>
                               navigate(`/reviews/${review.id}/edit`)
@@ -146,12 +182,22 @@ const UserProfilePage = () => {
                             />
                           </button>
                           <button
-                            onClick={() => handleDeleteReview(review.id)}
+                            // onClick={() => handleDeleteReview(review.id)}
                             className="review-edit-delete-button"
                           >
-                            <img
-                              src="https://res.cloudinary.com/dkxfjbynk/image/upload/v1716588777/b616eb42-5250-4686-8288-a1d843e55284.png"
-                              className="review-edit-delete-image"
+                            <OpenModalMenuItem
+                              itemText={
+                                <img
+                                  src="https://res.cloudinary.com/dkxfjbynk/image/upload/v1716588777/b616eb42-5250-4686-8288-a1d843e55284.png"
+                                  className="review-edit-delete-image"
+                                />
+                              }
+                              modalComponent={
+                                <DeleteReviewModal
+                                  reviewId={review.id}
+                                  id={id}
+                                />
+                              }
                             />
                           </button>
                         </div>

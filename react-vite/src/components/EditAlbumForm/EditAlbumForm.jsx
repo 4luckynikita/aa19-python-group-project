@@ -17,6 +17,11 @@ const EditAlbumForm = ({ id, data }) => {
       setTitle(data.title || "");
       setDescription(data.description || "");
       setImageUrl(data.image_url || "");
+      setRelease_date(
+        data.release_date
+          ? new Date(data.release_date).toISOString().split("T")[0]
+          : ""
+      );
     }
   }, [data, id]);
 
@@ -35,7 +40,11 @@ const EditAlbumForm = ({ id, data }) => {
       setTitle(updatedAlbum.title || "");
       setDescription(updatedAlbum.description || "");
       setImageUrl(updatedAlbum.image_url || "");
-      // dispatch(fetchAlbums(user.id));
+      setRelease_date(
+        updatedAlbum.release_date
+          ? new Date(updatedAlbum.release_date).toISOString().split("T")[0]
+          : ""
+      );
     }
   };
 
@@ -61,6 +70,7 @@ const EditAlbumForm = ({ id, data }) => {
           name="release_date"
           value={release_date}
           onChange={(e) => setRelease_date(e.target.value)}
+          onFocus={(e) => e.target.showPicker()}
           placeholder="Release Date"
           required
         />
