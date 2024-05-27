@@ -1,0 +1,91 @@
+.edit-user-form-container {
+    width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-user-form-container h1 {
+    font-size: 50px;
+  margin-top: 0px;
+  width: 60%;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.edit-user-form {
+    display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.edit-user-text-container {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60%;
+  margin-bottom: 20px;
+}
+
+.edit-user-p-tag {
+    width: 60%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 25px;
+  margin: 20px 0px;
+}
+.edit-user-text-container input {
+    margin-left: 20px;
+    width: 60%;
+    color: black;
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: white;
+    border-radius: 8px;
+}
+.edit-user-text-container textarea {
+    margin-left: 20px;
+    width: 60%;
+    min-height: 150px;
+    color: black;
+    padding: 20px;
+    font-size: 20px;
+    background-color: white;
+    border-radius: 8px;
+}
+.edit-update-button-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+  
+    margin-top: 20px;
+  
+    margin-bottom: 20px;
+  }
+  .edit-user-submit-button {
+    padding: 10px 20px;
+    background-color: rgb(52, 176, 164);
+    color: white;
+    border-radius: 20px;
+    border: none;
+    font-size: 19px;
+  }
+  .edit-user-cancel-button {
+    padding: 10px 20px;
+    background-color: rgb(177, 0, 0);
+    color: white;
+    border-radius: 20px;
+    border: none;
+    font-size: 19px;
+  }
+  .edit-user-submit-button:hover,
+  .edit-user-cancel-button:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 1px 1px white;
+  }
+  

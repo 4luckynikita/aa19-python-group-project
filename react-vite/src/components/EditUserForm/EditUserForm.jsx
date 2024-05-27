@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getUser, updateUser } from "../../redux/users";
+import "./EditUserForm.css"
 
 const EditUserForm = () => {
   const { id } = useParams();
@@ -70,9 +71,11 @@ const EditUserForm = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email
+    <div className="edit-user-form-container">
+      <h1>Edit User Profile</h1>
+      <form onSubmit={handleSubmit} className="edit-user-form">
+      <label className="edit-user-text-container">
+        <p className="edit-user-p-tag">Email</p>
         <input
           type="email"
           name="email"
@@ -80,13 +83,14 @@ const EditUserForm = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           required
+          className="edit-user-textbox"
         />
       </label>
 
       {isMusician ? (
         <>
-          <label>
-            Musician/Band Name
+          <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Musician/Band Name</p>
             <input
               type="text"
               name="name"
@@ -94,9 +98,10 @@ const EditUserForm = () => {
               onChange={(e) => setName(e.target.value)}
               placeholder="Musician/Band Name"
               required
+              className="edit-user-textbox"
             />
           </label>
-          <label>
+          <label className="edit-user-text-container">
             Genre
             <input
               type="text"
@@ -105,13 +110,14 @@ const EditUserForm = () => {
               onChange={(e) => setGenre(e.target.value)}
               placeholder="Genre"
               required
+              className="edit-user-textbox"
             />
           </label>
         </>
       ) : (
         <>
-          <label>
-            Username
+          <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Username</p>
             <input
               type="text"
               name="username"
@@ -119,10 +125,11 @@ const EditUserForm = () => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
               required
+              className="edit-user-textbox"
             />
           </label>
-          <label>
-            First Name
+          <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">First Name</p>
             <input
               type="text"
               name="first_name"
@@ -130,10 +137,11 @@ const EditUserForm = () => {
               onChange={(e) => setFirstName(e.target.value)}
               placeholder="First Name"
               required
+              className="edit-user-textbox"
             />
           </label>
-          <label>
-            Last Name
+          <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Last Name</p>
             <input
               type="text"
               name="last_name"
@@ -141,34 +149,37 @@ const EditUserForm = () => {
               onChange={(e) => setLastName(e.target.value)}
               placeholder="Last Name"
               required
+              className="edit-user-textbox"
             />
           </label>
         </>
       )}
 
-      <label>
-        Password
+      <label className="edit-user-text-container">
+      <p className="edit-user-p-tag">Password</p>
         <input
           type="password"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="Password (optional)"
+          className="edit-user-textbox"
         />
       </label>
 
-      <label>
-        Description
+      <label className="edit-user-text-container">
+      <p className="edit-user-p-tag">Description</p>
         <textarea
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
           required
+          className="edit-user-textbox"
         />
       </label>
-      <label>
-        Image URL
+      <label className="edit-user-text-container">
+      <p className="edit-user-p-tag">Image URL</p>
         <input
           type="text"
           name="image_url"
@@ -176,10 +187,23 @@ const EditUserForm = () => {
           onChange={(e) => setImageUrl(e.target.value)}
           placeholder="Image URL"
           required
+          className="edit-user-textbox"
         />
       </label>
-      <button type="submit">Update User</button>
+      <div className="edit-update-button-container">
+          <button type="submit" className="edit-user-submit-button">
+            Update
+          </button>
+          <button
+            type="button"
+            className="edit-user-cancel-button"
+            onClick={() => navigate(`/landing`)}
+          >
+            Cancel
+          </button>
+        </div>
     </form>
+    </div>
   );
 };
 

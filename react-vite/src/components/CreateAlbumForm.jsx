@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createAnAlbum, fetchAlbums, fetchCurrentAlbum } from "../redux/albums";
-
+import "./EditUserForm/EditUserForm.css"
 import { useNavigate } from "react-router-dom";
 // import { getUser, updateUser } from "../../redux/users";
 
@@ -52,17 +52,23 @@ const CreateAlbumForm = () => {
   //   if (error) return <div>Error: {error}</div>;
 
   return (
-    <>
+    <div className="edit-user-form-container">
       <h1>Add an Album</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="edit-user-form">
+      <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Title</p>
         <input
           type="text"
           name="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="title"
+          placeholder="Title"
           required
+          className="edit-user-textbox"
         />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Release Date</p>
         <input
           type="date"
           name="release_date"
@@ -71,23 +77,46 @@ const CreateAlbumForm = () => {
           onFocus={(e) => e.target.showPicker()}
           placeholder="Release Date"
           required
+
+          className="edit-user-textbox"
         />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Description</p>
         <textarea
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
+          className="edit-user-textbox"
         />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Image URL</p>
         <input
           type="url"
           name="imageUrl"
           value={image_url}
           onChange={(e) => setImageUrl(e.target.value)}
           placeholder="Image URL"
+          className="edit-user-textbox"
+
         />
-        <button type="submit">Create Album</button>
+        </label>
+        <div className="edit-update-button-container">
+          <button type="submit" className="edit-user-submit-button">
+            Add Songs
+          </button>
+          <button
+            type="button"
+            className="edit-user-cancel-button"
+            onClick={() => navigate(`/musicians/${user?.id}`)}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 
