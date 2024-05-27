@@ -35,7 +35,7 @@ def albums_by_msician_id(id):
             album_with_songs.append(album_dict)
         return jsonify(album_with_songs)
     else:
-        return {  "message": "Album could not be found" }, 404
+        return jsonify([])
 
 # Get specific album with songs and musician info
 @album_routes.route("/<int:id>")

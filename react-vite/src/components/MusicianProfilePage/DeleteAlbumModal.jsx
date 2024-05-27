@@ -3,7 +3,7 @@ import { useModal } from "../../context/Modal";
 // import { fetchCurrentMusician } from "../../redux/musicians";
 import { deleteAlbum, fetchAlbums } from "../../redux/albums";
 
-const DeleteAlbumModal = ({ album }) => {
+const DeleteAlbumModal = ({ album, rerender = null }) => {
   const { closeModal } = useModal();
   const currentUser = useSelector((state) => state.session.user);
   const id = album && album.id;
@@ -14,6 +14,9 @@ const DeleteAlbumModal = ({ album }) => {
 
     await dispatch(deleteAlbum(id)).then(closeModal);
     dispatch(fetchAlbums(currentUser.id));
+    if (rerender) {
+      rerender();
+    }
   };
 
   const close = (e) => {

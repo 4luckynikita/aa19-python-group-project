@@ -56,6 +56,10 @@ function AlbumComponent({ id }) {
     navigate(`/albums/${album.id}/edit`, { state: album });
   };
 
+  const rerender = () => {
+    dispatch(fetchAlbums(currentUser.id));
+  };
+
   return (
     <>
       <h1>albums</h1>
@@ -107,7 +111,12 @@ function AlbumComponent({ id }) {
                         {showDeleteButton && (
                           <OpenModalMenuItem
                             itemText={<MdDelete />}
-                            modalComponent={<DeleteAlbumModal album={album} />}
+                            modalComponent={
+                              <DeleteAlbumModal
+                                album={album}
+                                rerender={rerender}
+                              />
+                            }
                           />
                         )}
                         {/* <MdDeleteForever /> */}
