@@ -50,7 +50,7 @@ function SignupFormPage() {
       newErrors.confirmPassword =
         "Confirm Password field must be the same as the Password field.";
     }
-    if (username.length < 3 || username.length > 25) {
+    if (username && (username.length < 3 || username.length > 25)) {
       newErrors.username = "Username must be between 3 and 25 characters.";
     }
     if (description.length < 10 || description.length > 1000) {
@@ -78,11 +78,11 @@ function SignupFormPage() {
       userData.last_name = lastName;
     }
 
-    console.log("xxxxxxxxxxxxxxxx", userData);
+    console.log("USER INPUT ---------", userData);
 
     const serverResponse = await dispatch(thunkSignup(userData));
 
-    console.log("zzzzzzzzzzzzzzzzzzzz", serverResponse);
+    console.log("RESPONSE --------", serverResponse);
 
     if (serverResponse) {
       setErrors(serverResponse);

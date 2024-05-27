@@ -66,7 +66,7 @@ const UserProfilePage = () => {
   //   dispatch(getUserReviews(id));
   // };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <h1>Working...</h1>;
   if (error) return <div>Error: {error}</div>;
 
   if (!user) return <div>User not found</div>;
