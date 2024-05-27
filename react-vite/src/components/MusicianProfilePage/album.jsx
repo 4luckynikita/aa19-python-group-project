@@ -25,6 +25,7 @@ function AlbumComponent({ id }) {
   }, [dispatch, id]);
 
   const albums = useSelector((state) => state.musicianalbums.albums);
+
   const currentUser = useSelector((state) => state.session.user);
   const handleClick = (id, title) => {
     setAlbumID(id);
@@ -67,9 +68,11 @@ function AlbumComponent({ id }) {
         {albums &&
           albums.map((album) => {
             reviews.push(...album.reviews);
-            reviews.map((review) => {
+            album.reviews.map((review) => {
               if (review.user_id == currentUser.id) {
                 showReviewButton = false;
+              } else {
+                showReviewButton = true;
               }
             });
             return (
