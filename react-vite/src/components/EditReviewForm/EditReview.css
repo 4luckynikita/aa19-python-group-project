@@ -1,0 +1,64 @@
+.edit-review-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.edit-review-container h1 {
+  font-size: 50px;
+}
+.edit-review-form {
+  width: 70%;
+}
+.edit-review-comment-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px;
+  border-bottom: 3px solid white;
+}
+.edit-review-p-tag {
+  width: 10%;
+  font-size: 25px;
+  padding-right: 20px;
+}
+
+.edit-review-textbox {
+  width: 75%;
+  max-width: 75%;
+  height: 250px;
+  padding: 20px;
+  font-size: 25px;
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 8px;
+}
+.edit-review-lower-button-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 40px;
+}
+.edit-review-submit-button {
+  padding: 10px 20px;
+  background-color: rgb(52, 176, 164);
+  color: white;
+  border-radius: 20px;
+  border: none;
+  font-size: 19px;
+}
+.edit-review-cancel-button {
+  padding: 10px 20px;
+  background-color: rgb(177, 0, 0);
+  color: white;
+  border-radius: 20px;
+  border: none;
+  font-size: 19px;
+}
+.edit-review-submit-button:hover,
+.edit-review-cancel-button:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 1px 1px white;
+}

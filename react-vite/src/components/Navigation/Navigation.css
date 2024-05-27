@@ -4,12 +4,30 @@
   background-color: black;
   border: 2px solid black;
   padding: 5px;
-  top: 100px;
-  text-align: center;
+  top: 120px;
+
+  width: 150px;
+  min-height: 150px;
+  background-color: #020315;
+  border: 3px solid white;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile-dropdown li {
   list-style: none;
+}
+
+.profile-dropdown-button {
+  width: 135px;
+  height: 25px;
+  color: white;
+  background-color: gray;
+  border: none;
+  cursor: pointer;
+  border-radius: 12.5px;
 }
 
 .navbar {

@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import StarModalComponent from "./StarModalComponent";
 import { createReview } from "../../redux/reviews"; // Import the createReview thunk
 import "./CreateReviewModal.css";
+import { fetchAlbums } from "../../redux/albums";
 
-const CreateAReview = ({ albumId }) => {
+const CreateAReview = ({ albumId, musicianId }) => {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   // const currentUser = useSelector(state => state.session.user?.id);
@@ -34,10 +35,11 @@ const CreateAReview = ({ albumId }) => {
       };
       const result = await dispatch(createReview(albumId, reviewData));
       if (result) {
+        console.log(musicianId);
+        dispatch(fetchAlbums(musicianId));
         closeModal();
       }
     }
-    window.location.reload();
   };
 
   return (
