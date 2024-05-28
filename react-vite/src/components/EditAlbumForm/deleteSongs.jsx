@@ -1,6 +1,7 @@
 import { MdDelete } from "react-icons/md";
 import { deleteSong, fetchAlbums, fetchCurrentAlbum } from "../../redux/albums";
 import { useDispatch, useSelector } from "react-redux";
+import "../EditUserForm/EditUserForm.css"
 
 function DeleteSong({ songsArray, id }) {
   const currentUser = useSelector((state) => state.session.user);
@@ -17,9 +18,10 @@ function DeleteSong({ songsArray, id }) {
   return (
     <>
       {songsArray && (
-        <ol>
+        <ol className="edit-user-text-container">
+          <p className="edit-user-p-tag underlined-p">Song List</p>
           {songsArray.map((song) => (
-            <li key={song.id}>
+            <li key={song.id} className="song-list-li">
               {song.title}
               <MdDelete
                 onClick={(e) => {
@@ -29,6 +31,7 @@ function DeleteSong({ songsArray, id }) {
               />
             </li>
           ))}
+          {!songsArray.length && <p>This album has no songs</p>}
         </ol>
       )}
     </>
