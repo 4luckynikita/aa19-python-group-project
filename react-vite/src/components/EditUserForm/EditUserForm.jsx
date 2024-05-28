@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getUser, updateUser } from "../../redux/users";
+import "./EditUserForm.css";
 
 const EditUserForm = () => {
   const { id } = useParams();
@@ -70,116 +71,139 @@ const EditUserForm = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
-      </label>
+    <div className="edit-user-form-container">
+      <h1>Edit User Profile</h1>
+      <form onSubmit={handleSubmit} className="edit-user-form">
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Email</p>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+            className="edit-user-textbox"
+          />
+        </label>
 
-      {isMusician ? (
-        <>
-          <label>
-            Musician/Band Name
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Musician/Band Name"
-              required
-            />
-          </label>
-          <label>
-            Genre
-            <input
-              type="text"
-              name="genre"
-              value={genre}
-              onChange={(e) => setGenre(e.target.value)}
-              placeholder="Genre"
-              required
-            />
-          </label>
-        </>
-      ) : (
-        <>
-          <label>
-            Username
-            <input
-              type="text"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
-              required
-            />
-          </label>
-          <label>
-            First Name
-            <input
-              type="text"
-              name="first_name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="First Name"
-              required
-            />
-          </label>
-          <label>
-            Last Name
-            <input
-              type="text"
-              name="last_name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Last Name"
-              required
-            />
-          </label>
-        </>
-      )}
+        {isMusician ? (
+          <>
+            <label className="edit-user-text-container">
+              <p className="edit-user-p-tag">Musician/Band Name</p>
+              <input
+                type="text"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Musician/Band Name"
+                required
+                className="edit-user-textbox"
+              />
+            </label>
+            <label className="edit-user-text-container">
+              Genre
+              <input
+                type="text"
+                name="genre"
+                value={genre}
+                onChange={(e) => setGenre(e.target.value)}
+                placeholder="Genre"
+                required
+                className="edit-user-textbox"
+              />
+            </label>
+          </>
+        ) : (
+          <>
+            <label className="edit-user-text-container">
+              <p className="edit-user-p-tag">Username</p>
+              <input
+                type="text"
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+                required
+                className="edit-user-textbox"
+              />
+            </label>
+            <label className="edit-user-text-container">
+              <p className="edit-user-p-tag">First Name</p>
+              <input
+                type="text"
+                name="first_name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="First Name"
+                required
+                className="edit-user-textbox"
+              />
+            </label>
+            <label className="edit-user-text-container">
+              <p className="edit-user-p-tag">Last Name</p>
+              <input
+                type="text"
+                name="last_name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Last Name"
+                required
+                className="edit-user-textbox"
+              />
+            </label>
+          </>
+        )}
 
-      <label>
-        Password
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-      </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Password</p>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password (optional)"
+            className="edit-user-textbox"
+          />
+        </label>
 
-      <label>
-        Description
-        <textarea
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
-          required
-        />
-      </label>
-      <label>
-        Image URL
-        <input
-          type="text"
-          name="image_url"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-          placeholder="Image URL"
-          required
-        />
-      </label>
-      <button type="submit">Update User</button>
-    </form>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Description</p>
+          <textarea
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+            required
+            className="edit-user-textbox"
+          />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Image URL</p>
+          <input
+            type="text"
+            name="image_url"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            placeholder="Image URL"
+            required
+            className="edit-user-textbox"
+          />
+        </label>
+        <div className="edit-update-button-container">
+          <button type="submit" className="edit-user-submit-button">
+            Update
+          </button>
+          <button
+            type="button"
+            className="edit-user-cancel-button"
+            onClick={() => navigate(`/landing`)}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

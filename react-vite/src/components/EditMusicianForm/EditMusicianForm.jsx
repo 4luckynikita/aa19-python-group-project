@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getUser, updateUser } from "../../redux/users";
+import "../EditUserForm/EditUserForm.css";
 
 const EditMusicianForm = () => {
   const { id } = useParams();
@@ -53,45 +54,79 @@ const EditMusicianForm = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
-      <input
-        type="text"
-        name="genre"
-        value={genre}
-        onChange={(e) => setGenre(e.target.value)}
-        placeholder="Genre"
-      />
-      <textarea
-        name="description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
-      />
-      <input
-        type="text"
-        name="image_url"
-        value={imageUrl}
-        onChange={(e) => setImageUrl(e.target.value)}
-        placeholder="Image URL"
-      />
-      <button type="submit">Update Musician</button>
-    </form>
+    <div className="edit-user-form-container">
+      <h1>Edit Musician Profile</h1>
+      <form onSubmit={handleSubmit} className="edit-user-form">
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Name</p>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Name"
+            required
+            className="edit-user-textbox"
+          />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Email</p>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+            className="edit-user-textbox"
+          />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Genre</p>
+          <input
+            type="text"
+            name="genre"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            placeholder="Genre"
+            className="edit-user-textbox"
+          />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Description</p>
+          <textarea
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+            className="edit-user-textbox"
+          />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Image URL</p>
+          <input
+            type="text"
+            name="image_url"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            placeholder="Image URL"
+            className="edit-user-textbox"
+          />
+        </label>
+        <div className="edit-update-button-container">
+          <button type="submit" className="edit-user-submit-button">
+            Update
+          </button>
+          <button
+            type="button"
+            className="edit-user-cancel-button"
+            onClick={() => navigate(`/landing`)}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

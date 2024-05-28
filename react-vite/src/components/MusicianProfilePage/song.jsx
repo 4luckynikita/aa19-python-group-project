@@ -11,7 +11,7 @@ function SongsComponent({ songs }) {
                 <li>
                   <div className="songList">
                     <p>{song.title}</p>
-                    <p>{song.duration}</p>
+                    <p>{song.duration} seconds</p>
                   </div>
                 </li>
               </>

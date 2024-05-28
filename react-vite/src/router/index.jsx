@@ -13,6 +13,7 @@ import EditMusicianForm from "../components/EditMusicianForm/EditMusicianForm";
 import CreateAlbumForm from "../components/CreateAlbumForm.jsx";
 import EditPage from "../components/EditAlbumForm/EditPage.jsx";
 import CreateSongPage from "../components/SongsComponent/CreateSongPage.jsx";
+import About from "../components/AboutUs/AboutUs.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -99,6 +100,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <CreateSongPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "aboutus",
+        element: (
+          <ProtectedRoute>
+            <About />
           </ProtectedRoute>
         ),
       },

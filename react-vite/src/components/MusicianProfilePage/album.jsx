@@ -11,6 +11,8 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteAlbumModal from "./DeleteAlbumModal";
 import { FaPencil } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import "../UserProfilePage/UserProfilePage.css";
+import ReviewMicrophones from "../ReviewMicrophones/ReviewMicrophones";
 
 function AlbumComponent({ id }) {
   const dispatch = useDispatch();
@@ -33,6 +35,7 @@ function AlbumComponent({ id }) {
   // let showReviewButton = true;
   let showDeleteButton = false;
   let showReviewButton = true;
+  if (currentUser.is_musician) showReviewButton = false;
 
   // if (currentUser) {
   //   if (currentUser.id == id) {
@@ -61,15 +64,23 @@ function AlbumComponent({ id }) {
   };
 
   return (
-    <>
-      <h1>albums</h1>
+    <div className="album-component-container">
+      <div className="musician-profile-line" />
+      <h1>Albums</h1>
+      <h3>Click on an album to filter reviews by album</h3>
       <div className="all-albums-grid">
         {albums &&
           albums.map((album) => {
             reviews.push(...album.reviews);
-            reviews.map((review) => {
+            console.log("aaaa", reviews);
+            let reviewsTotal = 0;
+            reviews.map((review) => (reviewsTotal += review?.rating));
+            let avgReview = reviewsTotal / reviews.length;
+            album.reviews.map((review) => {
               if (review.user_id == currentUser.id) {
                 showReviewButton = false;
+              } else {
+                showReviewButton = true;
               }
             });
             return (
@@ -83,7 +94,7 @@ function AlbumComponent({ id }) {
                 >
                   <div className="album-image-container">
                     <img
-                      className="album-image"
+                      className="musician-album-image"
                       src={
                         album.image_url
                           ? `${album.image_url}`
@@ -94,6 +105,7 @@ function AlbumComponent({ id }) {
                   </div>
                   <div className="album-details-container">
                     <h2 className="album-name">{album.title}</h2>
+                    <ReviewMicrophones stars={avgReview} />
                     <hr className="line" />
                     <p className="album-year">
                       {album.release_date.split(" ")[3]}
@@ -107,7 +119,7 @@ function AlbumComponent({ id }) {
                       {/* {showReviewButton && (
                         <button className="review-button">add review</button>
                       )} */}
-                      <div>
+                      <div className="musician-edit-delete-album-container">
                         {showDeleteButton && (
                           <OpenModalMenuItem
                             itemText={<MdDelete />}
@@ -149,13 +161,13 @@ function AlbumComponent({ id }) {
             );
           })}
       </div>
-      <hr />
+      <div className="musician-profile-line" />
       <ReviewsComponent
         reviews={reviews && reviews}
         id={albumID}
         title={albumTitle}
       />
-    </>
+    </div>
   );
 }
 

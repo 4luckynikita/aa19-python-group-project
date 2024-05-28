@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import ReviewMicrophones from "../ReviewMicrophones/ReviewMicrophones";
 
 function ReviewsComponent({ reviews, id, title }) {
   //   console.log(reviews);
@@ -15,20 +16,25 @@ function ReviewsComponent({ reviews, id, title }) {
 
   return (
     <>
-      <h1>Reviews</h1>
-      {id ? <h1>Reviews for {reviewTitle}</h1> : <h1>All Reviews</h1>}
+      {id ? (
+        <h1 className="bigger-h1">Reviews for {reviewTitle}</h1>
+      ) : (
+        <h1 className="bigger-h1">All Reviews</h1>
+      )}
       {reviews &&
         reviews.map((review) => {
           // console.log(review.created_at.split(" "))
           return (
-            <div key={review.id}>
+            <div key={review.id} className="musician-review-div">
               <h2>{review.album.title}</h2>
               <NavLink to={`/users/${review.user.id}`}>
                 {review.user.username}
               </NavLink>
               <p>{new Date(review.created_at).toLocaleDateString()}</p>
-              <p>{review.rating}</p>
-              <p>{review.comment}</p>
+              <p className="text-aligned-ptag">
+                Review: <ReviewMicrophones stars={review.rating} />
+              </p>
+              <p className="padded-ass-p">&quot;{review.comment}&quot;</p>
             </div>
           );
         })}

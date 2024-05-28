@@ -26,7 +26,7 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container">
-      <h1 className="homepage-home-text">HOME</h1>
+      {/* <h1 className="homepage-home-text">HOME</h1> */}
       <div className="homepage-featured-container">
         <div className="homepage-featured-container-inner">
           <h1 className="homepage-featured-container-title">Recommended</h1>
@@ -55,6 +55,9 @@ const HomePage = () => {
               </div>
             </NavLink>
           )}
+        </div>
+        <div className="very-cool-line" />
+        <div className="homepage-featured-container-inner">
           <h1 className="homepage-featured-container-title">
             Well Received Albums
           </h1>
@@ -79,6 +82,7 @@ const HomePage = () => {
               ))}
           </div>
         </div>
+        <div className="very-cool-line" />
         <div className="homepage-featured-container-inner">
           <h1 className="homepage-featured-container-title">New Releases</h1>
           <div className="homepage-featured-image-container">

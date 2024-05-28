@@ -45,7 +45,7 @@ const CreateAReview = ({ albumId, musicianId }) => {
   return (
     <div className="review-modal-container">
       <form onSubmit={handleSubmit}>
-        <h1>{`Add Your Review for ${albumId}`}</h1>
+        <h1>{`Add Your Review`}</h1>
         {errors.review && <p className="errors-mess">{errors.review}</p>}
         <textarea
           type="text"

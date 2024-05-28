@@ -16,6 +16,12 @@
   align-items: center;
 }
 
+.aboutus {
+  text-decoration: none;
+  padding-right: 50px;
+  font-size: 20px;
+}
+
 .profile-dropdown li {
   list-style: none;
 }
