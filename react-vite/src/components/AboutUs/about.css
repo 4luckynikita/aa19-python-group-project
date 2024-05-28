@@ -1,0 +1,35 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.git {
+  padding: 50px 0px;
+  border-bottom: grey 2px solid;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.git a {
+  text-decoration: none;
+  margin-left: 30px;
+  font-size: 50px;
+  transition: transofrm 0.5s ease;
+}
+
+.icongit {
+  transition: transofrm 0.5s ease;
+}
+
+.git:hover .icongit,
+.git:hover a {
+  transform: scale(1.3);
+}
+
+.git .icongit {
+  font-size: 50px;
+}

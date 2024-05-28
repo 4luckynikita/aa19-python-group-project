@@ -12,6 +12,7 @@ function Navigation() {
   const sessionUser = useSelector((state) => state.session.user);
   const showProfileButton =
     location.pathname !== "/landing" && location.pathname !== "/signup";
+  const showAbout = location.pathname !== "/landing";
   const showArtistButton =
     sessionUser &&
     location.pathname !== "/landing" &&
@@ -57,6 +58,11 @@ function Navigation() {
         </NavLink>
       </li>
       <li className="navbar-right">
+        {showAbout && (
+          <NavLink className="aboutus" to="/aboutus">
+            About Us
+          </NavLink>
+        )}
         {showArtistButton && (
           <div className="dropdown" ref={dropdownRef}>
             <button onClick={toggleDropdown} className="dropdown-button">

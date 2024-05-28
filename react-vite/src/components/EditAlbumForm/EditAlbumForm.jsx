@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { editAlbum } from "../../redux/albums";
 import AddSongForm from "./AddSong";
+import "../EditUserForm/EditUserForm.css"
+import DeleteSong from "./deleteSongs";
 
-const EditAlbumForm = ({ id, data }) => {
+const EditAlbumForm = ({ id, data, songsArray=null }) => {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
@@ -36,7 +38,7 @@ const EditAlbumForm = ({ id, data }) => {
     const updatedAlbum = await dispatch(editAlbum(id, formData));
 
     if (updatedAlbum) {
-      alert(`you album has been updated`);
+      alert(`Your album has been updated`);
       setTitle(updatedAlbum.title || "");
       setDescription(updatedAlbum.description || "");
       setImageUrl(updatedAlbum.image_url || "");
@@ -56,45 +58,69 @@ const EditAlbumForm = ({ id, data }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="title"
-          required
-        />
-        <input
-          type="date"
-          name="release_date"
-          value={release_date}
-          onChange={(e) => setRelease_date(e.target.value)}
-          onFocus={(e) => e.target.showPicker()}
-          placeholder="Release Date"
-          required
-        />
-        <textarea
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
-        />
-        <input
-          type="text"
-          name="imageUrl"
-          value={image_url}
-          onChange={(e) => setImageUrl(e.target.value)}
-          placeholder="Image URL"
-        />
-        <button type="submit">Update Album</button>
-      </form>
-      {addSong && (
-        <div>
-          <AddSongForm />
+      <form onSubmit={handleSubmit} className="edit-user-form">
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Title</p>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Title"
+            required
+            className="edit-user-textbox"
+          />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Release Date</p>
+          <input
+            type="date"
+            name="release_date"
+            value={release_date}
+            onChange={(e) => setRelease_date(e.target.value)}
+            onFocus={(e) => e.target.showPicker()}
+            placeholder="Release Date"
+            required
+            className="edit-user-textbox"
+          />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Description</p>
+          <textarea
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+            className="edit-user-textbox"
+          />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Image URL</p>
+          <input
+            type="text"
+            name="imageUrl"
+            value={image_url}
+            onChange={(e) => setImageUrl(e.target.value)}
+            placeholder="Image URL"
+            className="edit-user-textbox"
+          />
+        </label>
+        <div className="edit-update-button-container">
+          <button type="submit" className="edit-user-submit-button">
+            Save Album Changes
+          </button>
         </div>
+
+      </form>
+      <div className="padded-white-line" />
+      <DeleteSong songsArray={songsArray} id={id} />
+      {addSong && (
+        <AddSongForm />
       )}
-      <button onClick={handleClick}>add more songs to your album</button>
+      {!addSong && (
+        <button onClick={handleClick} className="edit-user-submit-button">Add songs to your album</button>
+      )}
+      
     </>
   );
 };

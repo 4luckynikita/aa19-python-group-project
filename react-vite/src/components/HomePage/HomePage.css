@@ -4,22 +4,21 @@
   flex-direction: column;
   align-items: center;
 }
-.homepage-home-text {
+/* .homepage-home-text {
   font-size: 120px;
   margin: 0px;
-}
+} */
 .homepage-featured-container-inner {
   text-align: center;
-  padding-top: 30px;
 }
 .homepage-featured-container-title {
-  font-size: 60px;
-  margin: 0px;
+  font-size: 45px;
 }
 .homepage-featured-image-container {
   display: flex;
-  width: 1200px;
+  width: 1500px;
   justify-content: space-between;
+  padding: 0px 50px;
 }
 
 .navlinkhome {
@@ -27,7 +26,7 @@
 }
 
 .homepage-featured-image {
-  width: 200px;
+  width: 180px;
 }
 .homepage-featured-description {
   font-size: 35px;
@@ -39,10 +38,9 @@
   text-align: right;
 }
 
-/* .homepage-featured-title {
-  border-bottom: grey solid 2px;
+.very-cool-line {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  margin-top: 10px;
 }
-
-.homepage-featured-description {
-  border-bottom: grey solid 2px;
-} */
