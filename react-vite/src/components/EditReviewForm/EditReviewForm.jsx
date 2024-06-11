@@ -15,9 +15,9 @@ const EditReviewForm = () => {
 
   const [rating, setRating] = useState(review?.rating || 0);
   const [comment, setComment] = useState(review?.comment || "");
-  const [stars, setStars] = useState(0);
+  const [stars, setStars] = useState(review?.rating || 0);
 
-  console.log("zzzzzzzzzzzzzzzzzzzzzzzzz", review);
+  //console.log("zzzzzzzzzzzzzzzzzzzzzzzzz", review);
 
   useEffect(() => {
     dispatch(getReview(reviewId));

@@ -78,11 +78,11 @@ function SignupFormPage() {
       userData.last_name = lastName;
     }
 
-    console.log("USER INPUT ---------", userData);
+    //console.log("USER INPUT ---------", userData);
 
     const serverResponse = await dispatch(thunkSignup(userData));
 
-    console.log("RESPONSE --------", serverResponse);
+    //console.log("RESPONSE --------", serverResponse);
 
     if (serverResponse) {
       setErrors(serverResponse);

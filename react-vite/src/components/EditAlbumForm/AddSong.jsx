@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CreateSong, fetchAlbums, fetchCurrentAlbum } from "../../redux/albums";
+import "../EditUserForm/EditUserForm.css"
 
 function AddSongForm() {
   const dispatch = useDispatch();
@@ -22,9 +23,9 @@ function AddSongForm() {
       duration,
     };
     const newSong = await dispatch(CreateSong(formData, id));
-    // console.log(createdAlbum)
+    // //console.log(createdAlbum)
     if (newSong) {
-      console.log("===========>", "yes");
+      //console.log("===========>", "yes");
       reset();
       dispatch(fetchAlbums(sessionUser.id));
       dispatch(fetchCurrentAlbum(id));
@@ -36,27 +37,39 @@ function AddSongForm() {
   //   if (error) return <div>Error: {error}</div>;
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className="edit-user-form-container">
+      <form onSubmit={handleSubmit} className="edit-user-form">
+      <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Title</p>
         <input
           type="text"
           name="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="title"
+          placeholder="Title"
           required
+          className="edit-user-textbox"
         />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Duration</p>
         <input
           type="integer"
           name="duration"
           value={duration}
           onChange={(e) => setDuration(e.target.value)}
-          placeholder="duration"
+          placeholder="Duration (In Seconds)"
           required
+          className="edit-user-textbox"
         />
-        <button type="submit">Submit</button>
+        </label>
+        <div className="edit-update-button-container">
+          <button type="submit" className="edit-user-submit-button">
+            Confirm Song Details
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

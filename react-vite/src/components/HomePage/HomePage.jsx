@@ -15,18 +15,18 @@ const HomePage = () => {
 
   let albumState = useSelector((state) => state.albums);
   let randInt = 4;
-  //   console.log(albumState?.albums);
+  //   //console.log(albumState?.albums);
 
   // albumState &&
   //   albumState?.albums?.length &&
   //   (randInt = Math.floor(Math.random() * albumState?.albums?.length));
 
-  //   console.log(randInt);
-  //console.log([...albumState?.albums].sort((a, b) => new Date(b.release_date) - new Date(a.release_date)))
+  //   //console.log(randInt);
+  ////console.log([...albumState?.albums].sort((a, b) => new Date(b.release_date) - new Date(a.release_date)))
 
   return (
     <div className="homepage-container">
-      <h1 className="homepage-home-text">HOME</h1>
+      {/* <h1 className="homepage-home-text">HOME</h1> */}
       <div className="homepage-featured-container">
         <div className="homepage-featured-container-inner">
           <h1 className="homepage-featured-container-title">Recommended</h1>
@@ -55,6 +55,9 @@ const HomePage = () => {
               </div>
             </NavLink>
           )}
+        </div>
+        <div className="very-cool-line" />
+        <div className="homepage-featured-container-inner">
           <h1 className="homepage-featured-container-title">
             Well Received Albums
           </h1>
@@ -79,6 +82,7 @@ const HomePage = () => {
               ))}
           </div>
         </div>
+        <div className="very-cool-line" />
         <div className="homepage-featured-container-inner">
           <h1 className="homepage-featured-container-title">New Releases</h1>
           <div className="homepage-featured-image-container">

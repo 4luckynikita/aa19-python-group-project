@@ -1,9 +1,10 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import EditAlbumForm from "./EditAlbumForm";
-import DeleteSong from "./deleteSongs";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCurrentAlbum } from "../../redux/albums";
+import "../EditUserForm/EditUserForm.css";
 
 function EditPage() {
   const { id } = useParams();
@@ -18,22 +19,29 @@ function EditPage() {
     dispatch(fetchCurrentAlbum(id));
   }, [id, dispatch]);
   const albums = useSelector((state) => state.musicianalbums.currentAlbum[0]);
-  console.log(albums);
+  //console.log(albums);
   const allAlbums = albums && albums.songs;
 
   const redirect = (e) => {
-    // console.log('hi')
+    // //console.log('hi')
     e.preventDefault();
     navigate(`/musicians/${user.id}/`);
   };
-  //    console.log(allAlbums)
+  //    //console.log(allAlbums)
   return (
-    <>
-      <h1>edit</h1>
-      <EditAlbumForm data={data} id={id} />
-      <DeleteSong songsArray={allAlbums} id={id} />
-      <button onClick={redirect}>done</button>
-    </>
+    <div className="edit-user-form-container">
+      <h1>Edit Your Album</h1>
+      <h2>
+        Make and save changes on any parts, and then click &quot;Submit&quot; to
+        apply them!
+      </h2>
+      <EditAlbumForm data={data} id={id} songsArray={allAlbums} />
+      {/* <DeleteSong songsArray={allAlbums} id={id} /> */}
+      <div className="padded-white-line" />
+      <button onClick={redirect} className="edit-user-submit-button">
+        Submit
+      </button>
+    </div>
   );
 }
 

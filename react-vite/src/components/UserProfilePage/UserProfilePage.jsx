@@ -26,17 +26,15 @@ const DeleteReviewModal = ({ reviewId, id }) => {
   };
 
   return (
-    <div className="form-container">
+    <div className="delete-modal-container">
       <h1 className="black">Confirm Delete</h1>
       <p className="black">Are you sure you want to delete this review?</p>
-      <div>
-        <button className="delete" onClick={handleClick}>
-          Yes
+      <div className="delete-modal-button-container">
+        <button className="delete-modal-delete-button" onClick={handleClick}>
+          Delete
         </button>
-      </div>
-      <div>
-        <button className="keep" onClick={close}>
-          No
+        <button className="delete-modal-keep-button" onClick={close}>
+          Cancel
         </button>
       </div>
     </div>
@@ -83,7 +81,7 @@ const UserProfilePage = () => {
                 alt={user.image_url}
                 className="user-profile-picture"
               />
-              <div className="user-profile-socials-container">
+              {/* <div className="user-profile-socials-container">
                 <a
                   href="https://www.facebook.com"
                   target="_blank"
@@ -124,7 +122,7 @@ const UserProfilePage = () => {
                     className="user-profile-social-logo"
                   />
                 </a>
-              </div>
+              </div> */}
             </div>
             <div className="user-profile-container-right">
               <div className="user-profile-container-right-upper">

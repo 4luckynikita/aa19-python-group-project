@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { CreateSong, fetchAlbums } from "../../redux/albums";
+import "../EditUserForm/EditUserForm.css";
 
 function CreateSongForm() {
   const dispatch = useDispatch();
@@ -23,9 +24,9 @@ function CreateSongForm() {
       duration,
     };
     const newSong = await dispatch(CreateSong(formData, id));
-    // console.log(createdAlbum)
+    // //console.log(createdAlbum)
     if (newSong) {
-      console.log("===========>", "yes");
+      //console.log("===========>", "yes");
       reset();
       dispatch(fetchAlbums(sessionUser.id));
       navigate(`/musicians/${sessionUser.id}/`);
@@ -37,25 +38,35 @@ function CreateSongForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="title"
-          required
-        />
-        <input
-          type="integer"
-          name="duration"
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
-          placeholder="duration"
-          required
-        />
-
-        <button type="submit">Submit</button>
+      <form onSubmit={handleSubmit} className="edit-user-form">
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Title</p>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Title"
+            required
+            className="edit-user-textbox"
+          />
+        </label>
+        <label className="edit-user-text-container">
+          <p className="edit-user-p-tag">Duration in seconds</p>
+          <input
+            type="integer"
+            name="duration"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            placeholder="Duration in seconds"
+            required
+          />
+        </label>
+        <div className="edit-update-button-container">
+          <button type="submit" className="edit-user-submit-button">
+            Confirm
+          </button>
+        </div>
       </form>
     </>
   );
