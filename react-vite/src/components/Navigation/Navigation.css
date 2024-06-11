@@ -34,6 +34,7 @@
   border: none;
   cursor: pointer;
   border-radius: 12.5px;
+
 }
 
 .navbar {
@@ -77,6 +78,7 @@
 }
 .profile-button {
   height: 50px;
+  cursor: pointer;
 }
 
 .navbar-icon {
