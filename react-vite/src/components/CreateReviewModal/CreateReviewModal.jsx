@@ -35,7 +35,7 @@ const CreateAReview = ({ albumId, musicianId }) => {
       };
       const result = await dispatch(createReview(albumId, reviewData));
       if (result) {
-        console.log(musicianId);
+        //console.log(musicianId);
         dispatch(fetchAlbums(musicianId));
         closeModal();
       }

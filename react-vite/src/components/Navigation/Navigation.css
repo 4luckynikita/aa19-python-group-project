@@ -34,6 +34,7 @@
   border: none;
   cursor: pointer;
   border-radius: 12.5px;
+
 }
 
 .navbar {
@@ -77,6 +78,7 @@
 }
 .profile-button {
   height: 50px;
+  cursor: pointer;
 }
 
 .navbar-icon {
@@ -120,6 +122,10 @@
   padding-left: 0px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+
+  /* Webkit stuff */
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .artist-dropdown-li {
@@ -136,4 +142,24 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+}
+
+
+/* Webkit stuff for scroller */
+.dropdown-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

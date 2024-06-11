@@ -19,8 +19,10 @@ function AlbumComponent({ id }) {
   const navigate = useNavigate();
   const [albumTitle, setAlbumTitle] = useState("");
   const [albumID, setAlbumID] = useState("");
+  let showReviewButton = true;
+  let showCurrentReviewButton = true;
   let reviews = [];
-  // console.log(id)
+  // //console.log(id)
 
   useEffect(() => {
     dispatch(fetchAlbums(id));
@@ -34,22 +36,24 @@ function AlbumComponent({ id }) {
   };
   // let showReviewButton = true;
   let showDeleteButton = false;
-  let showReviewButton = true;
-  if (currentUser.is_musician) showReviewButton = false;
+ 
+  if (currentUser.is_musician === true) showReviewButton = false;
+  //console.log("currentUser", currentUser);
 
   // if (currentUser) {
   //   if (currentUser.id == id) {
-  //     // console.log(id)
+  //     // //console.log(id)
   //     showReviewButton = false;
   //   }
   // }
   if (currentUser) {
     if (currentUser.id == id) {
-      // console.log(id)
+      // //console.log(id)
       showReviewButton = false;
       showDeleteButton = true;
     }
   }
+
 
   if (!albums || albums.length === 0) {
     return <p>No albums added yet!</p>;
@@ -72,15 +76,15 @@ function AlbumComponent({ id }) {
         {albums &&
           albums.map((album) => {
             reviews.push(...album.reviews);
-            console.log("aaaa", reviews);
+            //console.log("aaaa", reviews);
             let reviewsTotal = 0;
             reviews.map((review) => (reviewsTotal += review?.rating));
             let avgReview = reviewsTotal / reviews.length;
             album.reviews.map((review) => {
               if (review.user_id == currentUser.id) {
-                showReviewButton = false;
+                showCurrentReviewButton = false;
               } else {
-                showReviewButton = true;
+                showCurrentReviewButton = true;
               }
             });
             return (
@@ -122,7 +126,8 @@ function AlbumComponent({ id }) {
                       <div className="musician-edit-delete-album-container">
                         {showDeleteButton && (
                           <OpenModalMenuItem
-                            itemText={<MdDelete />}
+                            
+                            itemText={<MdDelete style={{cursor: "pointer"}}/>}
                             modalComponent={
                               <DeleteAlbumModal
                                 album={album}
@@ -134,6 +139,7 @@ function AlbumComponent({ id }) {
                         {/* <MdDeleteForever /> */}
                         {showDeleteButton && (
                           <FaPencil
+                            style={{cursor: "pointer"}}
                             onClick={(e) => {
                               e.preventDefault();
                               handleUpdate(album);
@@ -141,7 +147,7 @@ function AlbumComponent({ id }) {
                           />
                         )}
                       </div>
-                      {showReviewButton && (
+                      {(showReviewButton && showCurrentReviewButton) && (
                         <OpenModalButton
                           className="post-review-button"
                           modalComponent={

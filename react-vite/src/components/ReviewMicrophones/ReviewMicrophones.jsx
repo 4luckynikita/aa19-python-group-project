@@ -5,7 +5,7 @@ const ReviewMicrophones = ({ stars }) => {
   for (let i = 0; i < stars; i++) {
     starsArr[i] = true;
   }
-  console.log(starsArr);
+  //console.log(starsArr);
 
   return (
     <div className="stars-component-container">

@@ -19,15 +19,15 @@ function EditPage() {
     dispatch(fetchCurrentAlbum(id));
   }, [id, dispatch]);
   const albums = useSelector((state) => state.musicianalbums.currentAlbum[0]);
-  console.log(albums);
+  //console.log(albums);
   const allAlbums = albums && albums.songs;
 
   const redirect = (e) => {
-    // console.log('hi')
+    // //console.log('hi')
     e.preventDefault();
     navigate(`/musicians/${user.id}/`);
   };
-  //    console.log(allAlbums)
+  //    //console.log(allAlbums)
   return (
     <div className="edit-user-form-container">
       <h1>Edit Your Album</h1>

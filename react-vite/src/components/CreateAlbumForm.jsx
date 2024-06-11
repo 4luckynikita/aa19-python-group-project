@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createAnAlbum, fetchAlbums, fetchCurrentAlbum } from "../redux/albums";
 import "./EditUserForm/EditUserForm.css";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 // import { getUser, updateUser } from "../../redux/users";
 
 const CreateAlbumForm = () => {
@@ -16,6 +17,7 @@ const CreateAlbumForm = () => {
   const [release_date, setRelease_date] = useState("");
   const [description, setDescription] = useState("");
   const [image_url, setImageUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const reset = () => {
     setTitle("");
@@ -30,6 +32,7 @@ const CreateAlbumForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = {
       title,
       release_date,
@@ -37,20 +40,20 @@ const CreateAlbumForm = () => {
       image_url,
     };
     const createdAlbum = await dispatch(createAnAlbum(formData));
-    console.log(createdAlbum);
+
     if (createdAlbum) {
-      // console.log("===========>", "yes");
+      
       reset();
       dispatch(fetchCurrentAlbum(createdAlbum.id));
       dispatch(fetchAlbums(user.id));
 
       navigate(`/albums/${createdAlbum.id}/songs`);
     }
+    setIsLoading(false);
   };
 
-  //   if (loading) return <div>Loading...</div>;
-  //   if (error) return <div>Error: {error}</div>;
-
+  if (isLoading) return <LoadingSpinner />;
+  
   return (
     <div className="edit-user-form-container">
       <h1>Add an Album</h1>

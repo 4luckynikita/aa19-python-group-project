@@ -23,9 +23,9 @@ function AddSongForm() {
       duration,
     };
     const newSong = await dispatch(CreateSong(formData, id));
-    // console.log(createdAlbum)
+    // //console.log(createdAlbum)
     if (newSong) {
-      console.log("===========>", "yes");
+      //console.log("===========>", "yes");
       reset();
       dispatch(fetchAlbums(sessionUser.id));
       dispatch(fetchCurrentAlbum(id));
