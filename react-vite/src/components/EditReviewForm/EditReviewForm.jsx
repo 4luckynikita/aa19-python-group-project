@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getReview, updateReview } from "../../redux/reviews";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "./EditReview.css";
 import StarModalComponent from "../CreateReviewModal/StarModalComponent";
 
@@ -13,6 +14,7 @@ const EditReviewForm = () => {
   const review = reviews.find((r) => r.id === parseInt(reviewId));
   const user = useSelector((state) => state.session.user);
 
+  const [isLoading, setIsLoading] = useState(true);
   const [rating, setRating] = useState(review?.rating || 0);
   const [comment, setComment] = useState(review?.comment || "");
   const [stars, setStars] = useState(review?.rating || 0);
@@ -20,23 +22,37 @@ const EditReviewForm = () => {
   //console.log("zzzzzzzzzzzzzzzzzzzzzzzzz", review);
 
   useEffect(() => {
-    dispatch(getReview(reviewId));
+    const fetchReview = async () => {
+      setIsLoading(true);
+      await dispatch(getReview(reviewId));
+      setIsLoading(false);
+    };
+
+    fetchReview();
+  }, [dispatch, reviewId]);
+
+  useEffect(() => {
     if (review) {
       setRating(review?.rating);
       setComment(review?.comment);
+      setIsLoading(false);
     }
-  }, [dispatch, reviewId, review]);
+  }, [review]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const updatedReview = {
       ...review,
       rating: stars,
       comment,
     };
     await dispatch(updateReview(reviewId, updatedReview));
+    setIsLoading(false);
     navigate(`/users/${user && user.id}`);
   };
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="edit-review-container">
