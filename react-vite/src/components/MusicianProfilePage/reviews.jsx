@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import ReviewMicrophones from "../ReviewMicrophones/ReviewMicrophones";
 
 function ReviewsComponent({ reviews, id, title }) {
-  //   console.log(reviews);
+  //   //console.log(reviews);
   let reviewTitle;
 
   if (id) {
@@ -12,7 +12,7 @@ function ReviewsComponent({ reviews, id, title }) {
 
     reviewTitle = title;
   }
-  // console.log("=====================", reviews);
+  // //console.log("=====================", reviews);
 
   return (
     <>
@@ -23,7 +23,7 @@ function ReviewsComponent({ reviews, id, title }) {
       )}
       {reviews &&
         reviews.map((review) => {
-          // console.log(review.created_at.split(" "))
+          // //console.log(review.created_at.split(" "))
           return (
             <div key={review.id} className="musician-review-div">
               <h2>{review.album.title}</h2>

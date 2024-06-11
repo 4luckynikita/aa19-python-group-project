@@ -37,9 +37,9 @@ const CreateAlbumForm = () => {
       image_url,
     };
     const createdAlbum = await dispatch(createAnAlbum(formData));
-    console.log(createdAlbum);
+    //console.log(createdAlbum);
     if (createdAlbum) {
-      // console.log("===========>", "yes");
+      // //console.log("===========>", "yes");
       reset();
       dispatch(fetchCurrentAlbum(createdAlbum.id));
       dispatch(fetchAlbums(user.id));

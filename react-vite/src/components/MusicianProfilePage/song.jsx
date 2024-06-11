@@ -1,5 +1,5 @@
 function SongsComponent({ songs }) {
-  // console.log(songs)
+  // //console.log(songs)
   return (
     <>
       <h1>Songs</h1>

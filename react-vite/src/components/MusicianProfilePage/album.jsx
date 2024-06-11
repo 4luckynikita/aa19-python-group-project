@@ -22,7 +22,7 @@ function AlbumComponent({ id }) {
   let showReviewButton = true;
   let showCurrentReviewButton = true;
   let reviews = [];
-  // console.log(id)
+  // //console.log(id)
 
   useEffect(() => {
     dispatch(fetchAlbums(id));
@@ -38,17 +38,17 @@ function AlbumComponent({ id }) {
   let showDeleteButton = false;
  
   if (currentUser.is_musician === true) showReviewButton = false;
-  console.log("currentUser", currentUser);
+  //console.log("currentUser", currentUser);
 
   // if (currentUser) {
   //   if (currentUser.id == id) {
-  //     // console.log(id)
+  //     // //console.log(id)
   //     showReviewButton = false;
   //   }
   // }
   if (currentUser) {
     if (currentUser.id == id) {
-      // console.log(id)
+      // //console.log(id)
       showReviewButton = false;
       showDeleteButton = true;
     }
@@ -76,7 +76,7 @@ function AlbumComponent({ id }) {
         {albums &&
           albums.map((album) => {
             reviews.push(...album.reviews);
-            console.log("aaaa", reviews);
+            //console.log("aaaa", reviews);
             let reviewsTotal = 0;
             reviews.map((review) => (reviewsTotal += review?.rating));
             let avgReview = reviewsTotal / reviews.length;
@@ -126,7 +126,8 @@ function AlbumComponent({ id }) {
                       <div className="musician-edit-delete-album-container">
                         {showDeleteButton && (
                           <OpenModalMenuItem
-                            itemText={<MdDelete />}
+                            
+                            itemText={<MdDelete style={{cursor: "pointer"}}/>}
                             modalComponent={
                               <DeleteAlbumModal
                                 album={album}
@@ -138,6 +139,7 @@ function AlbumComponent({ id }) {
                         {/* <MdDeleteForever /> */}
                         {showDeleteButton && (
                           <FaPencil
+                            style={{cursor: "pointer"}}
                             onClick={(e) => {
                               e.preventDefault();
                               handleUpdate(album);

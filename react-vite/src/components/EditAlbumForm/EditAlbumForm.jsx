@@ -51,7 +51,7 @@ const EditAlbumForm = ({ id, data, songsArray=null }) => {
   };
 
   const handleClick = (e) => {
-    // console.log('hi')
+    // //console.log('hi')
     e.preventDefault();
     setAddsong(true);
   };
@@ -82,6 +82,7 @@ const EditAlbumForm = ({ id, data, songsArray=null }) => {
             placeholder="Release Date"
             required
             className="edit-user-textbox"
+            style={{cursor: "pointer"}}
           />
         </label>
         <label className="edit-user-text-container">

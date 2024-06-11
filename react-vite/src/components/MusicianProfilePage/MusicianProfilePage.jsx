@@ -17,12 +17,12 @@ function MusicianProfilePage() {
   }, [dispatch, id]);
 
   const musician = useSelector((state) => state.musician.musician);
-  // console.log(musician)
+  // //console.log(musician)
 
   let showButton = false;
   if (musician) {
     if (sessionUser.id == id && sessionUser.is_musician == true) {
-      // console.log(id)
+      // //console.log(id)
       showButton = true;
     }
   }

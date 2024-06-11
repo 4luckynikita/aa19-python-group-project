@@ -17,7 +17,7 @@ const createAlbum = (album) => ({
 });
 
 export const createAnAlbum = (formData) => async (dispatch) => {
-  // console.log(JSON.stringify(formData))
+  // //console.log(JSON.stringify(formData))
   const response = await fetch(`/api/albums/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -38,7 +38,7 @@ export const createAnAlbum = (formData) => async (dispatch) => {
 };
 
 export const CreateSong = (formData, id) => async (dispatch) => {
-  // console.log(JSON.stringify(formData))
+  // //console.log(JSON.stringify(formData))
   const response = await fetch(`/api/songs/albums/${id}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -166,10 +166,10 @@ export const getAlbums = () => async (dispatch) => {
 };
 
 export const fetchCurrentAlbum = (albumId) => async (dispatch) => {
-  console.log("bbbbbbhiiiiiiiiiii");
+  //console.log("bbbbbbhiiiiiiiiiii");
   const res = await fetch(`/api/albums/${albumId}`);
   if (res.ok) {
-    console.log("hiiiiiiiiiii");
+    //console.log("hiiiiiiiiiii");
     const current = await res.json();
     dispatch(getCurrentAlbum(current));
   }

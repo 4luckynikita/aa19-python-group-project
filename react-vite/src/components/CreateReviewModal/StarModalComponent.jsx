@@ -8,7 +8,7 @@ const StarModalComponent = ({
 }) => {
   const [CurrentRating, setCurrentRating] = useState(defaultRating);
 
-  const bigModeStyling = { fontSize: "30px" };
+  const bigModeStyling = { fontSize: "30px", cursor: "pointer"};
   const bigModeStylingReturn = { fontSize: "30px" };
 
   const handleRatingClick = (rating) => {
@@ -38,6 +38,7 @@ const StarModalComponent = ({
               className={`fa-${
                 CurrentRating >= i ? "solid" : "regular"
               } fa-star`}
+              style={{cursor: "pointer"}}
             ></i>
           )}
         </div>
