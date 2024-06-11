@@ -1,0 +1,24 @@
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  font-size: 30px;
+  text-align: center;
+  padding-top: 20vh;
+  gap: 80px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.beatspinner {
+  width: 400px;
+  animation: spin 2s linear infinite;
+}
