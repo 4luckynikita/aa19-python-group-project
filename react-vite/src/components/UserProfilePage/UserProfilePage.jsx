@@ -81,7 +81,7 @@ const UserProfilePage = () => {
                 alt={user.image_url}
                 className="user-profile-picture"
               />
-              <div className="user-profile-socials-container">
+              {/* <div className="user-profile-socials-container">
                 <a
                   href="https://www.facebook.com"
                   target="_blank"
@@ -122,7 +122,7 @@ const UserProfilePage = () => {
                     className="user-profile-social-logo"
                   />
                 </a>
-              </div>
+              </div> */}
             </div>
             <div className="user-profile-container-right">
               <div className="user-profile-container-right-upper">

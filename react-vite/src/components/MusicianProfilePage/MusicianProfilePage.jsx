@@ -42,7 +42,7 @@ function MusicianProfilePage() {
             }
             alt="artist's/band's photo"
           />
-          <div className="user-profile-socials-container">
+          {/* <div className="user-profile-socials-container">
             <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
               <img
                 src="https://res.cloudinary.com/dkxfjbynk/image/upload/v1716589080/085acd0d-df7a-4317-8df5-6941a1106f09.png"
@@ -75,7 +75,7 @@ function MusicianProfilePage() {
                 className="user-profile-social-logo"
               />
             </a>
-          </div>
+          </div> */}
         </div>
         <div className="user-profile-container-right">
           <div className="user-profile-container-right-upper">
