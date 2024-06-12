@@ -233,3 +233,28 @@
   justify-content: space-between;
   width: 80px;
 }
+
+
+@media screen and (max-width: 950px) {
+  .user-profile-container {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  }
+
+  .user-profile-joindate {
+    text-align: right;
+    margin-right: 0;
+  }
+
+}
+
+
+@media screen and (max-width: 426px) {
+  .user-profile-picture {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 100px;
+  }
+
+}
