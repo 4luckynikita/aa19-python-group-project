@@ -111,3 +111,13 @@ background-color: rgba(165, 42, 42, 0.275);
   display: flex;
   justify-content: space-between;
 }
+
+
+@media screen and (max-width: 1000px) {
+  .all-albums-grid {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 426px) {}

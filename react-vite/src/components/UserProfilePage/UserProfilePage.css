@@ -235,7 +235,7 @@
 }
 
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1000px) {
   .user-profile-container {
   flex-direction: column;
   justify-content: center;
@@ -246,15 +246,13 @@
     text-align: right;
     margin-right: 0;
   }
-
-}
-
-
-@media screen and (max-width: 426px) {
-  .user-profile-picture {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 100px;
+  .user-profile-username {
+    font-size: 40px;
+    text-align: center;
   }
-
+  .user-profile-edit-container2 {
+    width: 70%;
+    justify-content: center;
+    gap: 1em;
+  }
 }
