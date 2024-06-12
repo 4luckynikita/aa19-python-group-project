@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getUser, updateUser } from "../../redux/users";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "./EditUserForm.css";
 
 const EditUserForm = () => {
@@ -12,6 +13,7 @@ const EditUserForm = () => {
   const loading = useSelector((state) => state.users.loading);
   const error = useSelector((state) => state.users.error);
 
+  const [isLoading, setIsLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +24,16 @@ const EditUserForm = () => {
   const [genre, setGenre] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      setIsLoading(true);
+      await dispatch(getUser(id));
+      setIsLoading(false);
+    };
+
+    fetchUser();
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (user) {
@@ -37,13 +49,10 @@ const EditUserForm = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    dispatch(getUser(id));
-  }, [dispatch, id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     const formData = {
       email,
       password,
@@ -65,9 +74,10 @@ const EditUserForm = () => {
     if (updatedUser) {
       navigate(`/users/${id}/`);
     }
+    setIsLoading(false);
   };
 
-  if (loading) return <h1>Working...</h1>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -197,7 +207,7 @@ const EditUserForm = () => {
           <button
             type="button"
             className="edit-user-cancel-button"
-            onClick={() => navigate(`/landing`)}
+            onClick={() => navigate(`/users/${id}/`)}
           >
             Cancel
           </button>
