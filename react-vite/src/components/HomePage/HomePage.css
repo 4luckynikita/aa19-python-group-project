@@ -44,3 +44,37 @@
   background-color: white;
   margin-top: 10px;
 }
+
+@media (max-width: 769px) {
+  .homepage-featured-container-title {
+    font-size: 30px;
+    /* margin-bottom: -200px; */
+  }
+
+  .homepage-featured-image-container {
+    flex-direction: column;
+    padding: 0px 20px;
+    align-items: center;
+  }
+
+  .homepage-featured-image {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .homepage-featured-description {
+    font-size: 18px;
+  }
+
+  .homepage-featured-leftmost-container {
+    text-align: center;
+  }
+
+  .homepage-featured-container-image {
+    margin-bottom: 20px;
+  }
+
+  .homepage-featured-container-inner {
+    margin-bottom: 40px;
+  }
+}

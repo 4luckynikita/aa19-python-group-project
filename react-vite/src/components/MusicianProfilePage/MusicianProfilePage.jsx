@@ -14,7 +14,6 @@ function MusicianProfilePage() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
-  
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(fetchCurrentMusician(id));

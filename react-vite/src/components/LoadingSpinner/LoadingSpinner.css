@@ -22,3 +22,9 @@
   width: 400px;
   animation: spin 2s linear infinite;
 }
+
+@media (max-width: 769px) {
+  .beatspinner {
+    width: 300px;
+  }
+}

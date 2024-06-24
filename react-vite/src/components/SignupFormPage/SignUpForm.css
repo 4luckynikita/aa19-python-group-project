@@ -84,3 +84,47 @@
   cursor: pointer;
   box-shadow: 2px 2px 1px 1px white;
 }
+
+@media (max-width: 769px) {
+  .edit-user-form {
+    width: 100%;
+  }
+  .sign-up-container h1 {
+    font-size: 30px;
+    margin-top: 20px;
+    width: 80%;
+  }
+
+  .sign-up-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .sign-up-split {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 90%;
+  }
+
+  .sign-up-split p {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 90%;
+  }
+  .sign-up-split input {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 90%;
+  }
+  .sign-up-split textarea {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 90%;
+  }
+  .sign-up-button-container {
+    width: 85%;
+  }
+}

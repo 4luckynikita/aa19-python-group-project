@@ -233,3 +233,116 @@
   justify-content: space-between;
   width: 80px;
 }
+
+@media (max-width: 769px) {
+  .user-profile-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-profile-container-left,
+  .user-profile-container-right {
+    width: 100%;
+    text-align: center;
+  }
+
+  .user-profile-picture {
+    width: 150px;
+    height: 150px;
+  }
+
+  .user-profile-username {
+    font-size: 40px;
+  }
+
+  .user-profile-firstandlast,
+  .user-profile-joindate {
+    font-size: 20px;
+  }
+
+  .user-profile-description {
+    font-size: 18px;
+    width: 90%;
+  }
+
+  /* .user-everything-container {
+    padding: 20px;
+  } */
+
+  .review-container-full {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .review-container-leftmost,
+  .review-container-rightmost {
+    width: 100%;
+    text-align: center;
+  }
+
+  .review-container-rightmost {
+    border-bottom: 3px solid white;
+  }
+  .review-container-rightmost h1 {
+    font-size: 20px;
+  }
+
+  .user-profile-container-right {
+    margin: 0px;
+    width: 100%;
+  }
+
+  .user-profile-container-right-upper {
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    gap: 10px;
+  }
+
+  .user-profile-firstandlast {
+    font-size: 20px;
+    width: 80%;
+  }
+
+  .review-album-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .delete-modal-container {
+    padding: 20px;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    max-width: 400px;
+    background-color: #020315;
+  }
+
+  #modal-content {
+    background-color: transparent;
+    width: 90%;
+  }
+  #modal-content div {
+    margin: auto;
+    text-align: center;
+  }
+
+  .delete-modal-button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .delete-modal-delete-button,
+  .delete-modal-keep-button {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .delete-modal-button-container button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

@@ -111,3 +111,85 @@ background-color: rgba(165, 42, 42, 0.275);
   display: flex;
   justify-content: space-between;
 }
+
+@media (max-width: 769px) {
+  .album-component-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .album-container {
+    border-bottom: white 4px solid;
+    border-width: 60%;
+  }
+
+  .album-details-container {
+    width: 100%;
+  }
+
+  .songList p {
+    text-align: left;
+    font-size: 13px;
+  }
+
+  .musician-review-div {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    border-bottom: white 1px solid;
+  }
+
+  .all-albums-grid {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .album-name {
+    overflow-wrap: anywhere;
+  }
+
+  .bio-page_grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .album-image-container {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .album-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .user-profile-edit-container2 {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .delete-modal-button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .delete-modal-delete-button,
+  .delete-modal-keep-button {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .delete-modal-button-container button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

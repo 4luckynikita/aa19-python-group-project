@@ -55,7 +55,7 @@ const CreateAReview = ({ albumId, musicianId }) => {
         />
 
         {errors.stars && <p className="errors-mess">{errors.stars}</p>}
-        <StarModalComponent setStars={setStars} stars={stars} />
+        <StarModalComponent id="stars" setStars={setStars} stars={stars} />
 
         <button
           type="submit"

@@ -56,7 +56,9 @@ const EditReviewForm = () => {
 
   return (
     <div className="edit-review-container">
-      <h1>Edit Your Review for {review?.album && review?.album?.title}</h1>
+      <h1>
+        Edit Your Review for <br></br> {review?.album && review?.album?.title}
+      </h1>
       <form onSubmit={handleSubmit} className="edit-review-form">
         <StarModalComponent
           setStars={setStars}

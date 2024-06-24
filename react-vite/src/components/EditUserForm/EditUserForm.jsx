@@ -10,7 +10,7 @@ const EditUserForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.users.users[id]);
-  const loading = useSelector((state) => state.users.loading);
+  // const loading = useSelector((state) => state.users.loading);
   const error = useSelector((state) => state.users.error);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -48,7 +48,6 @@ const EditUserForm = () => {
       setImageUrl(user.image_url || "");
     }
   }, [user]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();

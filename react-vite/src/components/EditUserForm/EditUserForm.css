@@ -106,3 +106,54 @@
 .underlined-p {
   border-bottom: 3px solid white;
 }
+
+@media (max-width: 769px) {
+  .edit-user-form {
+    width: 100%;
+  }
+  .edit-user-form-container h1 {
+    font-size: 30px;
+    margin-top: 20px;
+    width: 80%;
+  }
+  .edit-user-form-container h2 {
+    font-size: 15px;
+    margin-top: -20px;
+    width: 90%;
+    text-align: center;
+  }
+
+  .edit-user-text-container {
+    padding: 0px;
+  }
+
+  .edit-user-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .edit-user-text-container {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 90%;
+  }
+
+  .edit-user-p-tag {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 90%;
+  }
+  .edit-user-text-container input {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 90%;
+  }
+  .edit-user-text-container textarea {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 90%;
+  }
+}

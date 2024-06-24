@@ -10,15 +10,21 @@ const About = () => {
       <div className="links">
         <div className="git">
           <FaGithub className="icongit" />
-          <a href="https://github.com/4luckynikita">Nikita</a>
+          <a href="https://github.com/4luckynikita" target="#">
+            Nikita
+          </a>
         </div>
         <div className="git">
           <FaGithub className="icongit" />
-          <a href="https://github.com/cecepot">Cece</a>
+          <a href="https://github.com/cecepot" target="#">
+            Cece
+          </a>
         </div>
         <div className="git">
           <FaGithub className="icongit" />
-          <a href="https://github.com/ErikHervall11">Erik</a>
+          <a href="https://github.com/ErikHervall11" target="#">
+            Erik
+          </a>
         </div>
       </div>
     </div>

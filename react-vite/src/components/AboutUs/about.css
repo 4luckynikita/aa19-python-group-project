@@ -33,3 +33,12 @@
 .git .icongit {
   font-size: 50px;
 }
+
+@media (max-width: 768px) {
+  .about {
+    font-size: 23px;
+  }
+  .about h2 {
+    text-align: center;
+  }
+}

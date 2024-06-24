@@ -52,7 +52,7 @@ const UserProfilePage = () => {
   const albums = useSelector((state) => state.albums.albums);
   const [isLoading, setIsLoading] = useState(true);
 
-  const loading = useSelector((state) => state.users.loading);
+  // const loading = useSelector((state) => state.users.loading);
   const error = useSelector((state) => state.users.error);
 
   useEffect(() => {
@@ -71,7 +71,6 @@ const UserProfilePage = () => {
   // };
 
   if (error) return <div>Error: {error}</div>;
-
 
   return (
     <>
@@ -140,7 +139,9 @@ const UserProfilePage = () => {
                     </p>
                   </div>
                   <div>
-                    <p className="user-profile-description">{user.description}</p>
+                    <p className="user-profile-description">
+                      {user.description}
+                    </p>
                   </div>
                   {loggedInUser && loggedInUser.id === user.id && (
                     <div className="user-profile-edit-container">
@@ -171,43 +172,46 @@ const UserProfilePage = () => {
                               <br />{" "}
                             </h3>
                             <p>
-                              {new Date(review["created_at"]).toLocaleDateString()}
+                              {new Date(
+                                review["created_at"]
+                              ).toLocaleDateString()}
                             </p>
                           </div>
-                          {loggedInUser && loggedInUser.id === review.user_id && (
-                            <div className="editdeletecontainer">
-                              <button
-                                onClick={() =>
-                                  navigate(`/reviews/${review.id}/edit`)
-                                }
-                                className="review-edit-delete-button"
-                              >
-                                <img
-                                  src="https://res.cloudinary.com/dkxfjbynk/image/upload/v1716588692/d9d1887d-a603-4456-8c4e-37c2c272364c.png"
-                                  className="review-edit-delete-image"
-                                />
-                              </button>
-                              <button
-                                // onClick={() => handleDeleteReview(review.id)}
-                                className="review-edit-delete-button"
-                              >
-                                <OpenModalMenuItem
-                                  itemText={
-                                    <img
-                                      src="https://res.cloudinary.com/dkxfjbynk/image/upload/v1716588777/b616eb42-5250-4686-8288-a1d843e55284.png"
-                                      className="review-edit-delete-image"
-                                    />
+                          {loggedInUser &&
+                            loggedInUser.id === review.user_id && (
+                              <div className="editdeletecontainer">
+                                <button
+                                  onClick={() =>
+                                    navigate(`/reviews/${review.id}/edit`)
                                   }
-                                  modalComponent={
-                                    <DeleteReviewModal
-                                      reviewId={review.id}
-                                      id={id}
-                                    />
-                                  }
-                                />
-                              </button>
-                            </div>
-                          )}
+                                  className="review-edit-delete-button"
+                                >
+                                  <img
+                                    src="https://res.cloudinary.com/dkxfjbynk/image/upload/v1716588692/d9d1887d-a603-4456-8c4e-37c2c272364c.png"
+                                    className="review-edit-delete-image"
+                                  />
+                                </button>
+                                <button
+                                  // onClick={() => handleDeleteReview(review.id)}
+                                  className="review-edit-delete-button"
+                                >
+                                  <OpenModalMenuItem
+                                    itemText={
+                                      <img
+                                        src="https://res.cloudinary.com/dkxfjbynk/image/upload/v1716588777/b616eb42-5250-4686-8288-a1d843e55284.png"
+                                        className="review-edit-delete-image"
+                                      />
+                                    }
+                                    modalComponent={
+                                      <DeleteReviewModal
+                                        reviewId={review.id}
+                                        id={id}
+                                      />
+                                    }
+                                  />
+                                </button>
+                              </div>
+                            )}
                         </div>
                         <div className="rating-mic-container">
                           <p>Rating:</p>
@@ -216,7 +220,10 @@ const UserProfilePage = () => {
                         <p className="rating-review-text">{review.comment}</p>
                       </div>
                       {filteredAlbums.map((album) => (
-                        <div key={album.id} className="review-container-rightmost">
+                        <div
+                          key={album.id}
+                          className="review-container-rightmost"
+                        >
                           <img
                             src={album.image_url}
                             alt="Album"

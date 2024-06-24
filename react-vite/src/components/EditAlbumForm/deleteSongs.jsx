@@ -1,12 +1,12 @@
 import { MdDelete } from "react-icons/md";
 import { deleteSong, fetchAlbums, fetchCurrentAlbum } from "../../redux/albums";
 import { useDispatch, useSelector } from "react-redux";
-import "../EditUserForm/EditUserForm.css"
+import "../EditUserForm/EditUserForm.css";
 
 function DeleteSong({ songsArray, id }) {
   const currentUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  const handleDelete = async (songId, title) => {
+  const handleDelete = async (songId) => {
     // alert(`you have deleted the song titled ${title}`);
     const deletedSong = await dispatch(deleteSong(songId, currentUser.id));
     if (deletedSong) {
@@ -28,7 +28,7 @@ function DeleteSong({ songsArray, id }) {
                   e.preventDefault();
                   handleDelete(song.id, song.title);
                 }}
-                style={{cursor: "pointer"}}
+                style={{ cursor: "pointer" }}
               />
             </li>
           ))}
